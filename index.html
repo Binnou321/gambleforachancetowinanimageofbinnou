@@ -8,6 +8,11 @@
 <title>Gamble for a Chance to Win a Binnou Image</title>
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -18,274 +23,676 @@ html {
 
 body {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #eeeeee;
-    color: #222;
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #20242b;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(87, 166, 255, 0.15),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(151, 92, 255, 0.12),
+            transparent 30%
+        ),
+        #edf1f5;
+
     overflow-x: hidden;
 }
 
-/* =========================
-   HEADER
-========================= */
 
-header {
-    background: #1f1f1f;
-    color: white;
-    border-bottom: 3px solid #111;
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
     position: sticky;
     top: 0;
+
     z-index: 100;
+
+    background: rgba(26, 30, 36, 0.96);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(8px);
 }
 
 .header-inner {
-    max-width: 1050px;
+    max-width: 1120px;
+
     margin: auto;
-    padding: 14px 18px;
+
+    padding:
+        13px
+        18px;
 
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
 }
 
 .logo {
-    font-size: 21px;
-    font-weight: bold;
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: white;
+
+    font-size: 19px;
+
+    font-weight: 800;
 }
 
-.logo span {
-    color: #aaa;
+.logo-icon {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #5865f2;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(88,101,242,0.35);
+}
+
+.logo-small {
+    color: #9ca3af;
+
+    font-weight: 500;
 }
 
 .sound-button {
-    border: 1px solid #555;
-    background: #2c2c2c;
+    border: 1px solid #454b55;
+
+    background: #292e36;
+
     color: white;
-    padding: 7px 11px;
-    border-radius: 4px;
+
+    padding:
+        8px
+        12px;
+
+    border-radius: 6px;
+
     cursor: pointer;
+
+    transition:
+        background .15s,
+        transform .15s;
 }
 
 .sound-button:hover {
-    background: #3a3a3a;
+    background: #343a44;
+
+    transform: translateY(-1px);
 }
 
-/* =========================
+
+/* =========================================================
    MAIN
-========================= */
+========================================================= */
 
-main {
-    max-width: 1050px;
+.main {
+    width: 100%;
+
+    max-width: 1120px;
+
     margin: auto;
-    padding: 28px 16px 50px;
+
+    padding:
+        28px
+        16px
+        60px;
 }
+
+
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero {
-    background: white;
-    border: 1px solid #ccc;
-    padding: 25px;
-    border-radius: 5px;
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 32px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #252a33,
+            #303846
+        );
+
+    color: white;
+
+    border:
+        1px solid #414957;
+
+    box-shadow:
+        0 12px 30px
+        rgba(25,30,38,0.16);
+
     margin-bottom: 18px;
 }
 
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    right: -100px;
+    top: -130px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(88,101,242,0.18);
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 1;
+}
+
 .hero h1 {
-    margin: 0 0 8px;
-    font-size: 30px;
+    margin:
+        0
+        0
+        9px;
+
+    font-size:
+        clamp(25px, 4vw, 38px);
+
+    line-height: 1.1;
 }
 
 .hero p {
+    max-width: 700px;
+
     margin: 0;
-    color: #666;
+
+    color: #c7ccd4;
+
+    line-height: 1.55;
 }
 
-/* =========================
+.warning {
+    display: inline-block;
+
+    margin-top: 17px;
+
+    padding:
+        7px
+        10px;
+
+    border-radius: 5px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: #d9dde4;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 18px;
+}
+
+.stat {
+    padding: 16px;
+
+    background: white;
+
+    border:
+        1px solid #d8dde4;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(30,40,50,0.05);
+}
+
+.stat-label {
+    color: #737b86;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .5px;
+}
+
+.stat-value {
+    margin-top: 5px;
+
+    font-size: 25px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   SECTION TITLES
+========================================================= */
+
+.section-title {
+    margin:
+        25px
+        0
+        11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.section-title h2 {
+    margin: 0;
+
+    font-size: 21px;
+}
+
+.section-title span {
+    color: #858c96;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
    GAME CARDS
-========================= */
+========================================================= */
 
 .games {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
     gap: 14px;
 }
 
 .game-card {
+    position: relative;
+
+    overflow: hidden;
+
     background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 18px;
+
+    border:
+        1px solid #d8dde4;
+
+    border-radius: 11px;
+
+    padding: 20px;
 
     cursor: pointer;
 
     transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        border-color 0.15s ease;
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+}
+
+.game-card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 0;
+
+    height: 3px;
+
+    background: var(--game-color);
 }
 
 .game-card:hover {
-    transform: translateY(-4px);
-    border-color: #888;
-    box-shadow: 0 7px 18px rgba(0,0,0,0.10);
+    transform:
+        translateY(-5px);
+
+    border-color:
+        var(--game-color);
+
+    box-shadow:
+        0 12px 25px
+        rgba(30,40,50,0.11);
+}
+
+.game-card:active {
+    transform:
+        translateY(-1px);
 }
 
 .game-icon {
-    font-size: 38px;
-    margin-bottom: 8px;
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        var(--game-bg);
+
+    font-size: 28px;
+
+    margin-bottom: 13px;
 }
 
-.game-card h2 {
-    margin: 0 0 7px;
-    font-size: 20px;
+.game-card h3 {
+    margin:
+        0
+        0
+        7px;
+
+    font-size: 19px;
 }
 
 .game-card p {
-    color: #666;
-    line-height: 1.4;
-    min-height: 42px;
+    min-height: 45px;
+
+    margin:
+        0
+        0
+        15px;
+
+    color: #737b86;
+
+    font-size: 14px;
+
+    line-height: 1.45;
 }
 
-.play-button {
+.game-button {
     width: 100%;
-    margin-top: 8px;
 
-    background: #222;
-    color: white;
+    padding:
+        10px
+        12px;
 
     border: 0;
-    border-radius: 4px;
 
-    padding: 11px;
+    border-radius: 6px;
 
-    font-weight: bold;
+    background:
+        var(--game-color);
+
+    color: white;
+
+    font-weight: 700;
+
     cursor: pointer;
 
-    transition: background 0.15s;
+    transition:
+        filter .15s,
+        transform .15s;
 }
 
-.play-button:hover {
-    background: #444;
+.game-button:hover {
+    filter: brightness(1.08);
 }
 
-/* =========================
+.game-button:active {
+    transform: scale(.98);
+}
+
+
+/* =========================================================
    GAME PANEL
-========================= */
+========================================================= */
 
 .panel {
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
     margin-top: 18px;
+
+    padding: 21px;
+
+    background: white;
+
+    border:
+        1px solid #d8dde4;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(30,40,50,0.04);
 }
 
-.panel h2 {
-    margin-top: 0;
+.panel-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 15px;
+}
+
+.panel-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+}
+
+.game-status {
+    color: #7b838d;
+
+    font-size: 12px;
 }
 
 .game-area {
     text-align: center;
-    padding: 15px 0 5px;
+
+    padding:
+        8px
+        0
+        5px;
 }
 
-.game-instruction {
-    color: #666;
-    margin-bottom: 18px;
+.instruction {
+    color: #737b86;
+
+    margin:
+        5px
+        0
+        18px;
 }
 
 .choice-row {
     display: flex;
+
     justify-content: center;
+
+    align-items: center;
+
     flex-wrap: wrap;
-    gap: 9px;
+
+    gap: 8px;
 }
 
-.choice-button {
+.choice {
+    min-width: 60px;
+
+    padding:
+        10px
+        14px;
+
     background: white;
-    border: 1px solid #999;
-    padding: 10px 17px;
-    border-radius: 4px;
+
+    color: #272c33;
+
+    border:
+        1px solid #c8ced6;
+
+    border-radius: 6px;
+
+    font-weight: 700;
+
     cursor: pointer;
-    font-weight: bold;
 
     transition:
-        background 0.12s,
-        transform 0.12s;
+        background .13s,
+        border-color .13s,
+        transform .13s;
 }
 
-.choice-button:hover {
-    background: #eee;
-    transform: translateY(-2px);
+.choice:hover {
+    background: #f1f3f5;
+
+    border-color: #8e97a3;
+
+    transform:
+        translateY(-2px);
 }
 
-.choice-button:active {
-    transform: translateY(1px);
+.choice:active {
+    transform:
+        translateY(0);
 }
 
-/* =========================
+
+/* =========================================================
    RESULT
-========================= */
+========================================================= */
 
 .result {
-    min-height: 105px;
+    min-height: 86px;
 
     margin-top: 18px;
 
-    border: 1px dashed #aaa;
-    background: #fafafa;
-
-    border-radius: 4px;
-
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
 
-    font-size: 19px;
-    font-weight: bold;
-
     padding: 15px;
 
-    overflow: hidden;
+    border-radius: 8px;
+
+    border:
+        1px dashed #c5cbd3;
+
+    background: #f8f9fa;
+
+    color: #5d6671;
+
+    font-weight: 700;
+
+    transition:
+        background .2s,
+        border-color .2s;
 }
 
 .result.win {
-    animation: resultWin 0.55s ease;
+    background: #ecfdf3;
+
+    border-color: #73c995;
+
+    color: #167342;
+
+    animation:
+        resultWin .5s ease;
 }
 
 .result.loss {
-    animation: resultLoss 0.4s ease;
+    background: #fff2f2;
+
+    border-color: #e49a9a;
+
+    color: #a13232;
+
+    animation:
+        resultLoss .42s ease;
 }
 
 @keyframes resultWin {
+
     0% {
-        transform: scale(0.92);
         opacity: 0;
+        transform: scale(.94);
     }
 
     60% {
-        transform: scale(1.05);
+        transform: scale(1.035);
     }
 
     100% {
-        transform: scale(1);
         opacity: 1;
+        transform: scale(1);
     }
 }
 
 @keyframes resultLoss {
+
     0% {
         transform: translateX(0);
     }
 
-    25% {
+    20% {
         transform: translateX(-7px);
     }
 
-    50% {
+    40% {
         transform: translateX(7px);
     }
 
-    75% {
+    60% {
         transform: translateX(-4px);
     }
 
@@ -294,323 +701,501 @@ main {
     }
 }
 
-/* =========================
+
+/* =========================================================
    COIN
-========================= */
+========================================================= */
 
 .coin {
-    width: 100px;
-    height: 100px;
+    width: 105px;
+    height: 105px;
 
-    margin: 5px auto 20px;
+    margin:
+        3px
+        auto
+        20px;
 
     border-radius: 50%;
 
-    background: #d5d5d5;
-    border: 5px solid #999;
-
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    font-size: 25px;
-    font-weight: bold;
+    background:
+        linear-gradient(
+            145deg,
+            #ffd966,
+            #d9a62b
+        );
+
+    border:
+        6px solid #a77c19;
+
+    color: #6b4e0e;
+
+    font-size: 27px;
+
+    font-weight: 900;
 
     box-shadow:
-        inset 0 0 0 3px #eee,
-        0 4px 10px rgba(0,0,0,0.15);
+        inset 0 0 0 3px
+        rgba(255,255,255,.4),
+
+        0 7px 15px
+        rgba(0,0,0,.15);
 }
 
-.coin.flipping {
-    animation: coinFlip 0.9s ease;
+.coin.flip {
+    animation:
+        coinFlip .85s ease;
 }
 
 @keyframes coinFlip {
+
     0% {
-        transform: rotateY(0);
+        transform:
+            rotateY(0)
+            scale(1);
     }
 
     50% {
-        transform: rotateY(900deg) scale(1.08);
+        transform:
+            rotateY(900deg)
+            scale(1.08);
     }
 
     100% {
-        transform: rotateY(1800deg);
+        transform:
+            rotateY(1800deg)
+            scale(1);
     }
 }
 
-/* =========================
+
+/* =========================================================
    DICE
-========================= */
+========================================================= */
 
 .dice {
-    width: 90px;
-    height: 90px;
+    width: 95px;
+    height: 95px;
 
-    margin: 5px auto 20px;
-
-    background: white;
-    border: 3px solid #333;
-    border-radius: 12px;
+    margin:
+        3px
+        auto
+        20px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    font-size: 45px;
-    font-weight: bold;
+    background: white;
 
-    box-shadow: 0 4px 9px rgba(0,0,0,0.12);
+    border:
+        3px solid #343a40;
+
+    border-radius: 15px;
+
+    color: #252a30;
+
+    font-size: 46px;
+
+    font-weight: 900;
+
+    box-shadow:
+        0 7px 15px
+        rgba(0,0,0,.12);
 }
 
-.dice.rolling {
-    animation: diceRoll 0.8s ease;
+.dice.roll {
+    animation:
+        diceRoll .75s ease;
 }
 
 @keyframes diceRoll {
+
     0% {
-        transform: rotate(0) scale(1);
+        transform:
+            rotate(0)
+            scale(1);
     }
 
-    25% {
-        transform: rotate(100deg) scale(1.1);
-    }
-
-    50% {
-        transform: rotate(220deg) scale(0.95);
-    }
-
-    75% {
-        transform: rotate(310deg) scale(1.1);
-    }
-
-    100% {
-        transform: rotate(360deg) scale(1);
-    }
-}
-
-/* =========================
-   NUMBER
-========================= */
-
-.number-display {
-    font-size: 55px;
-    font-weight: bold;
-
-    height: 80px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.number-display.spinning {
-    animation: numberSpin 0.8s ease;
-}
-
-@keyframes numberSpin {
-    0% {
-        transform: scale(0.7);
-        opacity: 0;
-    }
-
-    40% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* =========================
-   BINNOU REWARD
-========================= */
-
-.reward {
-    text-align: center;
-}
-
-.binnou-container {
-    min-height: 280px;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    justify-content: center;
-}
-
-.binnou-image {
-    max-width: 280px;
-    max-height: 280px;
-
-    border: 1px solid #bbb;
-    background: #eee;
-
-    padding: 5px;
-
-    display: block;
-
-    animation: binnouAppear 0.7s ease;
-}
-
-@keyframes binnouAppear {
-    0% {
-        opacity: 0;
-        transform: scale(0.5) rotate(-5deg);
+    30% {
+        transform:
+            rotate(130deg)
+            scale(1.1);
     }
 
     60% {
-        transform: scale(1.08) rotate(2deg);
+        transform:
+            rotate(260deg)
+            scale(.94);
+    }
+
+    100% {
+        transform:
+            rotate(360deg)
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.number-display {
+    height: 105px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 62px;
+
+    font-weight: 900;
+
+    color: #5865f2;
+}
+
+.number-display.spin {
+    animation:
+        numberSpin .65s ease;
+}
+
+@keyframes numberSpin {
+
+    0% {
+        transform:
+            scale(.65);
+
+        opacity: .2;
+    }
+
+    50% {
+        transform:
+            scale(1.18);
+
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   REWARD
+========================================================= */
+
+.reward-box {
+    min-height: 280px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.reward-lock {
+    width: 85px;
+    height: 85px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 13px;
+
+    border-radius: 50%;
+
+    background: #eef0f3;
+
+    font-size: 38px;
+}
+
+.reward-title {
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+.reward-text {
+    margin-top: 5px;
+
+    color: #7a828c;
+
+    font-size: 14px;
+}
+
+.binnou-image {
+    max-width: 300px;
+    max-height: 300px;
+
+    object-fit: contain;
+
+    border:
+        2px solid #5865f2;
+
+    border-radius: 10px;
+
+    padding: 6px;
+
+    background: #f5f6f8;
+
+    box-shadow:
+        0 12px 30px
+        rgba(88,101,242,.18);
+
+    animation:
+        binnouAppear .7s ease;
+}
+
+@keyframes binnouAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(.55)
+            rotate(-8deg);
+    }
+
+    65% {
+        transform:
+            scale(1.08)
+            rotate(2deg);
     }
 
     100% {
         opacity: 1;
-        transform: scale(1) rotate(0);
+
+        transform:
+            scale(1)
+            rotate(0);
     }
 }
 
-.hidden-reward {
-    color: #777;
-}
 
-.lock {
-    font-size: 65px;
-    margin-bottom: 10px;
-}
-
-/* =========================
+/* =========================================================
    ACHIEVEMENTS
-========================= */
+========================================================= */
 
 .achievements {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 10px;
 }
 
 .achievement {
-    border: 1px solid #ccc;
-    background: #fafafa;
-    border-radius: 4px;
-    padding: 14px;
-
     position: relative;
 
+    padding: 15px;
+
+    border:
+        1px solid #d8dde4;
+
+    border-radius: 8px;
+
+    background: #fafbfc;
+
     transition:
-        transform 0.15s,
-        background 0.2s;
+        transform .2s,
+        border-color .2s,
+        background .2s;
 }
 
 .achievement.completed {
-    background: #e8e8e8;
-    border-color: #888;
+    background: #f0fdf5;
+
+    border-color: #75c89a;
 }
 
-.achievement.completed::after {
-    content: "✓";
-
-    position: absolute;
-    right: 13px;
-    top: 12px;
-
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.achievement.unlocked {
-    animation: achievementPop 0.65s ease;
-}
-
-@keyframes achievementPop {
-    0% {
-        transform: scale(1);
-    }
-
-    40% {
-        transform: scale(1.08);
-    }
-
-    100% {
-        transform: scale(1);
-    }
+.achievement.completed:hover {
+    transform:
+        translateY(-2px);
 }
 
 .achievement-name {
-    font-weight: bold;
-    padding-right: 30px;
+    padding-right: 80px;
+
+    font-size: 15px;
+
+    font-weight: 800;
 }
 
 .achievement-description {
-    color: #666;
+    margin-top: 5px;
+
+    color: #737b86;
+
     font-size: 13px;
-    margin-top: 5px;
+
+    line-height: 1.4;
 }
 
-.achievement-progress {
-    margin-top: 10px;
-    height: 7px;
-    background: #ddd;
-    border-radius: 3px;
-    overflow: hidden;
+.achievement-rarity {
+    position: absolute;
+
+    top: 13px;
+    right: 13px;
+
+    padding:
+        4px
+        7px;
+
+    border-radius: 4px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: .4px;
 }
 
-.achievement-bar {
-    height: 100%;
-    background: #333;
-    transition: width 0.4s ease;
+.rarity-common {
+    background: #e8edf2;
+    color: #59636e;
 }
 
-.achievement-count {
-    font-size: 12px;
-    color: #777;
-    margin-top: 5px;
+.rarity-uncommon {
+    background: #dff5e8;
+    color: #247548;
 }
 
-/* =========================
-   CUSTOM ACHIEVEMENT
-========================= */
-
-.custom-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr 130px auto;
-    gap: 8px;
+.rarity-rare {
+    background: #e2eaff;
+    color: #435bb0;
 }
 
-.custom-form input {
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    padding: 10px;
+.rarity-epic {
+    background: #f0e4ff;
+    color: #7541a8;
 }
 
-.custom-form button {
-    border: 0;
-    background: #222;
+.rarity-legendary {
+    background: #fff0c9;
+    color: #8a6515;
+}
+
+.achievement-check {
+    position: absolute;
+
+    right: 13px;
+    bottom: 13px;
+
+    width: 23px;
+    height: 23px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #2da866;
+
     color: white;
-    border-radius: 3px;
-    padding: 10px 15px;
-    cursor: pointer;
+
+    font-size: 13px;
+
+    opacity: 0;
+
+    transform:
+        scale(.5);
+
+    transition:
+        opacity .2s,
+        transform .2s;
 }
 
-.custom-form button:hover {
-    background: #444;
+.achievement.completed
+.achievement-check {
+    opacity: 1;
+
+    transform:
+        scale(1);
 }
 
-/* =========================
+.progress {
+    height: 6px;
+
+    margin-top: 11px;
+
+    overflow: hidden;
+
+    background: #e1e5e9;
+
+    border-radius: 5px;
+}
+
+.progress-bar {
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #5865f2,
+            #7c86ff
+        );
+
+    border-radius: 5px;
+
+    transition:
+        width .45s ease;
+}
+
+.progress-text {
+    margin-top: 5px;
+
+    color: #89919b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
    HISTORY
-========================= */
+========================================================= */
 
 .history {
-    max-height: 270px;
+    max-height: 250px;
+
     overflow-y: auto;
-    border: 1px solid #ddd;
+
+    border:
+        1px solid #dce1e6;
+
+    border-radius: 7px;
 }
 
 .history-item {
-    padding: 9px 12px;
-    border-bottom: 1px solid #ddd;
+    padding:
+        10px
+        12px;
+
+    border-bottom:
+        1px solid #e5e8eb;
+
+    color: #59616b;
+
     font-size: 13px;
 }
 
@@ -619,12 +1204,23 @@ main {
 }
 
 .history-win {
-    font-weight: bold;
+    color: #217748;
+
+    font-weight: 700;
 }
 
-/* =========================
+.history-special {
+    background: #f3efff;
+
+    color: #6944a3;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
    TOAST
-========================= */
+========================================================= */
 
 .toast-container {
     position: fixed;
@@ -632,89 +1228,124 @@ main {
     right: 18px;
     bottom: 18px;
 
-    z-index: 500;
+    z-index: 1000;
 
     display: flex;
+
     flex-direction: column;
 
     gap: 9px;
 }
 
 .toast {
-    width: 310px;
+    width: 330px;
 
-    background: #222;
+    padding: 14px;
+
+    border-radius: 8px;
+
+    background:
+        #252a32;
+
     color: white;
 
-    border: 1px solid #444;
+    border:
+        1px solid #424a56;
 
-    border-radius: 4px;
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.25);
 
-    padding: 13px 15px;
+    animation:
+        toastIn .35s ease;
+}
 
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+.toast.achievement {
+    border-left:
+        4px solid #8c63d9;
+}
 
-    animation: toastIn 0.35s ease;
+.toast-badge {
+    font-size: 11px;
+
+    color: #aeb5c0;
+
+    text-transform: uppercase;
+
+    letter-spacing: .6px;
+
+    font-weight: 800;
 }
 
 .toast-title {
-    font-weight: bold;
-    margin-bottom: 4px;
+    margin-top: 3px;
+
+    font-weight: 800;
 }
 
 .toast-description {
-    color: #ccc;
-    font-size: 13px;
+    margin-top: 3px;
+
+    color: #c4c9d0;
+
+    font-size: 12px;
 }
 
 .toast.hide {
-    animation: toastOut 0.35s ease forwards;
+    animation:
+        toastOut .35s ease forwards;
 }
 
 @keyframes toastIn {
+
     from {
-        transform: translateX(120%);
+        transform:
+            translateX(120%);
+
         opacity: 0;
     }
 
     to {
-        transform: translateX(0);
+        transform:
+            translateX(0);
+
         opacity: 1;
     }
 }
 
 @keyframes toastOut {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
 
     to {
-        transform: translateX(120%);
+        transform:
+            translateX(120%);
+
         opacity: 0;
     }
 }
 
-/* =========================
+
+/* =========================================================
    CONFETTI
-========================= */
+========================================================= */
 
 .confetti {
     position: fixed;
 
-    width: 8px;
-    height: 8px;
-
     top: -15px;
 
-    z-index: 400;
+    width: 8px;
+    height: 12px;
+
+    z-index: 900;
 
     pointer-events: none;
 
-    animation: confettiFall 1.2s linear forwards;
+    animation:
+        confettiFall 1.35s linear forwards;
 }
 
 @keyframes confettiFall {
+
     to {
         transform:
             translateY(105vh)
@@ -724,36 +1355,28 @@ main {
     }
 }
 
-/* =========================
-   RESET
-========================= */
 
-.reset-button {
-    background: white;
-    border: 1px solid #999;
-    padding: 9px 14px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.reset-button:hover {
-    background: #eee;
-}
-
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
-footer {
+.footer {
     text-align: center;
-    color: #777;
-    font-size: 13px;
-    padding: 20px;
+
+    padding:
+        25px
+        15px
+        40px;
+
+    color: #8a919b;
+
+    font-size: 12px;
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 800px) {
 
@@ -761,33 +1384,85 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .achievements {
-        grid-template-columns: 1fr;
+    .stats {
+        grid-template-columns:
+            1fr;
     }
 
-    .custom-form {
-        grid-template-columns: 1fr;
+    .achievements {
+        grid-template-columns:
+            1fr;
+    }
+
+    .hero {
+        padding: 24px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .main {
+        padding:
+            18px
+            10px
+            40px;
+    }
+
+    .header-inner {
+        padding:
+            11px
+            12px;
+    }
+
+    .logo {
+        font-size: 16px;
     }
 
     .hero h1 {
-        font-size: 24px;
+        font-size: 25px;
+    }
+
+    .toast-container {
+        right: 10px;
+        left: 10px;
+        bottom: 10px;
     }
 
     .toast {
-        width: calc(100vw - 36px);
+        width: 100%;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
-<header>
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="header">
 
     <div class="header-inner">
 
         <div class="logo">
-            Binnou Chance <span>Game</span>
+
+            <div class="logo-icon">
+                B
+            </div>
+
+            <div>
+                Binnou Chance
+                <span class="logo-small">
+                    Game
+                </span>
+            </div>
+
         </div>
 
         <button
@@ -803,30 +1478,117 @@ footer {
 </header>
 
 
-<main>
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<main class="main">
+
+
+    <!-- HERO -->
 
     <section class="hero">
 
-        <h1>
-            Gamble for a Chance to Win a Binnou Image
-        </h1>
+        <div class="hero-content">
 
-        <p>
-            Choose a minigame and test your luck.
-            Every game gives you a chance to find Binnou.
-        </p>
+            <h1>
+                Gamble for a Chance to Win a Binnou Image
+            </h1>
+
+            <p>
+                Pick a game, test your luck and try to unlock
+                the legendary Binnou image.
+            </p>
+
+            <div class="warning">
+                Fictional game — no real money or prizes.
+            </div>
+
+        </div>
 
     </section>
 
 
-    <!-- =========================
-         GAME SELECTOR
-    ========================== -->
+    <!-- STATS -->
+
+    <section class="stats">
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Games Played
+            </div>
+
+            <div
+                class="stat-value"
+                id="gamesPlayed"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Wins
+            </div>
+
+            <div
+                class="stat-value"
+                id="wins"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Achievements
+            </div>
+
+            <div
+                class="stat-value"
+                id="achievementCount"
+            >
+                0/0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GAMES -->
+
+    <div class="section-title">
+
+        <h2>
+            Games
+        </h2>
+
+        <span>
+            Choose your game
+        </span>
+
+    </div>
+
 
     <section class="games">
 
+
+        <!-- COIN -->
+
         <div
             class="game-card"
+            style="
+                --game-color:#d49a1c;
+                --game-bg:#fff5d9;
+            "
             onclick="openCoinFlip()"
         >
 
@@ -834,23 +1596,29 @@ footer {
                 🪙
             </div>
 
-            <h2>
+            <h3>
                 Coin Flip
-            </h2>
+            </h3>
 
             <p>
-                Choose heads or tails and see which side appears.
+                Pick heads or tails and see which side the coin lands on.
             </p>
 
-            <button class="play-button">
-                Play
+            <button class="game-button">
+                Play Coin Flip
             </button>
 
         </div>
 
 
+        <!-- DICE -->
+
         <div
             class="game-card"
+            style="
+                --game-color:#4d7bd8;
+                --game-bg:#eaf0ff;
+            "
             onclick="openDice()"
         >
 
@@ -858,23 +1626,29 @@ footer {
                 🎲
             </div>
 
-            <h2>
+            <h3>
                 Dice Roll
-            </h2>
+            </h3>
 
             <p>
                 Pick a number from 1 to 6 and roll the dice.
             </p>
 
-            <button class="play-button">
-                Play
+            <button class="game-button">
+                Play Dice
             </button>
 
         </div>
 
 
+        <!-- NUMBER -->
+
         <div
             class="game-card"
+            style="
+                --game-color:#7c55c9;
+                --game-bg:#f0e9ff;
+            "
             onclick="openLuckyNumber()"
         >
 
@@ -882,40 +1656,50 @@ footer {
                 🔢
             </div>
 
-            <h2>
+            <h3>
                 Lucky Number
-            </h2>
+            </h3>
 
             <p>
-                Pick a number from 1 to 10 and try to hit the hidden number.
+                Choose one number from 1 to 10 and hope it's the one.
             </p>
 
-            <button class="play-button">
-                Play
+            <button class="game-button">
+                Play Lucky Number
             </button>
 
         </div>
 
+
     </section>
 
 
-    <!-- =========================
-         GAME
-    ========================== -->
+    <!-- GAME -->
 
     <section class="panel">
 
-        <h2 id="gameTitle">
-            Select a game
-        </h2>
+        <div class="panel-header">
+
+            <h2 id="gameTitle">
+                Select a game
+            </h2>
+
+            <span
+                class="game-status"
+                id="gameStatus"
+            >
+                Waiting
+            </span>
+
+        </div>
 
         <div
             class="game-area"
             id="gameArea"
         >
 
-            <p class="game-instruction">
-                Choose one of the games above.
+            <p class="instruction">
+                Choose one of the games above to start.
             </p>
 
         </div>
@@ -924,53 +1708,53 @@ footer {
             class="result"
             id="result"
         >
-            Waiting for you...
+            Ready when you are.
         </div>
 
     </section>
 
 
-    <!-- =========================
-         REWARD
-    ========================== -->
+    <!-- BINNOU -->
 
-    <section class="panel reward">
+    <div class="section-title">
 
         <h2>
             Binnou Collection
         </h2>
 
+        <span>
+            1 secret image
+        </span>
+
+    </div>
+
+
+    <section class="panel">
+
         <div
-            class="binnou-container"
+            class="reward-box"
             id="binnouReward"
-        >
-
-            <div class="lock">
-                🔒
-            </div>
-
-            <div class="hidden-reward">
-                The Binnou image is still locked.
-            </div>
-
-            <div class="hidden-reward">
-                Keep playing to find it.
-            </div>
-
-        </div>
+        ></div>
 
     </section>
 
 
-    <!-- =========================
-         ACHIEVEMENTS
-    ========================== -->
+    <!-- ACHIEVEMENTS -->
 
-    <section class="panel">
+    <div class="section-title">
 
         <h2>
             Achievements
         </h2>
+
+        <span>
+            Complete them all
+        </span>
+
+    </div>
+
+
+    <section class="panel">
 
         <div
             class="achievements"
@@ -980,63 +1764,22 @@ footer {
     </section>
 
 
-    <!-- =========================
-         CREATE ACHIEVEMENT
-    ========================== -->
+    <!-- HISTORY -->
 
-    <section class="panel">
+    <div class="section-title">
 
         <h2>
-            Make an Achievement
+            Recent Activity
         </h2>
 
-        <p style="color:#666;">
-            Create your own achievement. Custom achievements unlock
-            after you reach their win requirement.
-        </p>
+        <span>
+            Last 50 events
+        </span>
 
-        <div class="custom-form">
+    </div>
 
-            <input
-                id="achievementName"
-                type="text"
-                maxlength="35"
-                placeholder="Achievement name"
-            >
-
-            <input
-                id="achievementDescription"
-                type="text"
-                maxlength="80"
-                placeholder="Description"
-            >
-
-            <input
-                id="achievementRequirement"
-                type="number"
-                min="1"
-                value="10"
-                placeholder="Wins"
-            >
-
-            <button onclick="createAchievement()">
-                Create
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         HISTORY
-    ========================== -->
 
     <section class="panel">
-
-        <h2>
-            History
-        </h2>
 
         <div
             class="history"
@@ -1046,32 +1789,35 @@ footer {
     </section>
 
 
-    <!-- =========================
-         RESET
-    ========================== -->
+    <!-- RESET -->
 
-    <section class="panel">
-
-        <h2>
-            Data
-        </h2>
+    <section
+        class="panel"
+        style="text-align:center;"
+    >
 
         <button
-            class="reset-button"
+            class="choice"
             onclick="resetGame()"
         >
-            Reset Game
+            Reset Progress
         </button>
 
     </section>
 
+
 </main>
 
 
-<footer>
-    Binnou Chance Game — fictional luck game
+<footer class="footer">
+
+    Binnou Chance Game<br>
+    Everything is saved locally in your browser.
+
 </footer>
 
+
+<!-- TOASTS -->
 
 <div
     class="toast-container"
@@ -1079,16 +1825,36 @@ footer {
 ></div>
 
 
+<!-- ACHIEVEMENT AUDIO -->
+
+<audio
+    id="achievementSound"
+    src="achievement.mp3"
+    preload="auto"
+></audio>
+
+
 <script>
 
 /* =========================================================
-   GAME DATA
+   STORAGE
 ========================================================= */
 
-const STORAGE_KEY = "binnouChanceGameV2";
+const STORAGE_KEY =
+    "binnouChanceGameV3";
+
 
 let gameData =
-    JSON.parse(localStorage.getItem(STORAGE_KEY));
+    JSON.parse(
+        localStorage.getItem(
+            STORAGE_KEY
+        )
+    );
+
+
+/* =========================================================
+   DEFAULT DATA
+========================================================= */
 
 if (!gameData) {
 
@@ -1108,37 +1874,103 @@ if (!gameData) {
 
             {
                 id: 1,
-                name: "First Win",
-                description: "Win your first game.",
+
+                name: "First Steps",
+
+                description:
+                    "Win your first game.",
+
                 requirement: 1,
+
                 type: "wins",
+
+                rarity: "Common",
+
                 completed: false
             },
 
             {
                 id: 2,
+
                 name: "Getting Lucky",
-                description: "Win 5 games.",
+
+                description:
+                    "Win 5 games.",
+
                 requirement: 5,
+
                 type: "wins",
+
+                rarity: "Common",
+
                 completed: false
             },
 
             {
                 id: 3,
-                name: "Really Lucky",
-                description: "Win 15 games.",
-                requirement: 15,
+
+                name: "Fortune Favors You",
+
+                description:
+                    "Win 10 games.",
+
+                requirement: 10,
+
                 type: "wins",
+
+                rarity: "Uncommon",
+
                 completed: false
             },
 
             {
                 id: 4,
+
+                name: "Lucky Streak",
+
+                description:
+                    "Win 20 games.",
+
+                requirement: 20,
+
+                type: "wins",
+
+                rarity: "Rare",
+
+                completed: false
+            },
+
+            {
+                id: 5,
+
+                name: "Unreasonably Lucky",
+
+                description:
+                    "Win 50 games.",
+
+                requirement: 50,
+
+                type: "wins",
+
+                rarity: "Epic",
+
+                completed: false
+            },
+
+            {
+                id: 6,
+
                 name: "Binnou Hunter",
-                description: "Find the Binnou image.",
+
+                description:
+                    "Find the secret Binnou image.",
+
                 requirement: 1,
+
                 type: "binnou",
+
+                rarity: "Legendary",
+
                 completed: false
             }
 
@@ -1147,172 +1979,6 @@ if (!gameData) {
     };
 
     saveGame();
-}
-
-
-/* =========================================================
-   SOUND SYSTEM
-========================================================= */
-
-let soundEnabled = true;
-
-let audioContext = null;
-
-
-/*
-    We create simple sounds using Web Audio instead
-    of requiring an external sound library.
-*/
-
-function getAudioContext() {
-
-    if (!audioContext) {
-
-        audioContext =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
-
-    }
-
-    return audioContext;
-}
-
-
-function playTone(
-    frequency,
-    duration,
-    type = "sine",
-    volume = 0.08
-) {
-
-    if (!soundEnabled) return;
-
-    const ctx = getAudioContext();
-
-    const oscillator =
-        ctx.createOscillator();
-
-    const gain =
-        ctx.createGain();
-
-    oscillator.type = type;
-
-    oscillator.frequency.value =
-        frequency;
-
-    gain.gain.setValueAtTime(
-        volume,
-        ctx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        ctx.currentTime + duration
-    );
-
-    oscillator.connect(gain);
-
-    gain.connect(ctx.destination);
-
-    oscillator.start();
-
-    oscillator.stop(
-        ctx.currentTime + duration
-    );
-}
-
-
-function playClick() {
-
-    playTone(
-        500,
-        0.06,
-        "square",
-        0.035
-    );
-
-}
-
-
-function playWinSound() {
-
-    if (!soundEnabled) return;
-
-    playTone(523, 0.12);
-    
-    setTimeout(() => {
-        playTone(659, 0.12);
-    }, 100);
-
-    setTimeout(() => {
-        playTone(784, 0.18);
-    }, 200);
-
-}
-
-
-function playLossSound() {
-
-    if (!soundEnabled) return;
-
-    playTone(
-        220,
-        0.18,
-        "sawtooth",
-        0.035
-    );
-
-    setTimeout(() => {
-
-        playTone(
-            165,
-            0.25,
-            "sawtooth",
-            0.03
-        );
-
-    }, 130);
-
-}
-
-
-/*
-    Original achievement-style chime.
-*/
-
-function playAchievementSound() {
-
-    if (!soundEnabled) return;
-
-    playTone(659, 0.10);
-
-    setTimeout(() => {
-        playTone(784, 0.10);
-    }, 100);
-
-    setTimeout(() => {
-        playTone(1047, 0.20);
-    }, 200);
-
-}
-
-
-/* =========================================================
-   SOUND TOGGLE
-========================================================= */
-
-function toggleSound() {
-
-    soundEnabled = !soundEnabled;
-
-    document.getElementById(
-        "soundButton"
-    ).textContent =
-        soundEnabled
-            ? "🔊 Sound On"
-            : "🔇 Sound Off";
 
 }
 
@@ -1332,18 +1998,326 @@ function saveGame() {
 
 
 /* =========================================================
-   UI
+   AUDIO
 ========================================================= */
 
-function updateUI() {
+let soundEnabled = true;
 
-    updateAchievements();
+let audioContext = null;
 
-    updateReward();
 
-    updateHistory();
+function getAudioContext() {
 
-    saveGame();
+    if (!audioContext) {
+
+        audioContext =
+            new (
+                window.AudioContext ||
+                window.webkitAudioContext
+            )();
+
+    }
+
+    return audioContext;
+
+}
+
+
+function tone(
+    frequency,
+    duration,
+    type = "sine",
+    volume = 0.06
+) {
+
+    if (!soundEnabled)
+        return;
+
+    const ctx =
+        getAudioContext();
+
+    const oscillator =
+        ctx.createOscillator();
+
+    const gain =
+        ctx.createGain();
+
+    oscillator.type =
+        type;
+
+    oscillator.frequency.value =
+        frequency;
+
+    gain.gain.setValueAtTime(
+        volume,
+        ctx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime +
+        duration
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(
+        ctx.destination
+    );
+
+    oscillator.start();
+
+    oscillator.stop(
+        ctx.currentTime +
+        duration
+    );
+
+}
+
+
+/* CLICK */
+
+function sfxClick() {
+
+    tone(
+        520,
+        .045,
+        "square",
+        .025
+    );
+
+}
+
+
+/* COIN */
+
+function sfxCoin() {
+
+    tone(
+        700,
+        .07,
+        "triangle",
+        .035
+    );
+
+}
+
+
+/* DICE */
+
+function sfxDice() {
+
+    tone(
+        300 +
+        Math.random() * 250,
+        .055,
+        "square",
+        .025
+    );
+
+}
+
+
+/* NUMBER */
+
+function sfxNumber() {
+
+    tone(
+        430 +
+        Math.random() * 200,
+        .04,
+        "square",
+        .02
+    );
+
+}
+
+
+/* WIN */
+
+function sfxWin() {
+
+    if (!soundEnabled)
+        return;
+
+    tone(523, .09);
+
+    setTimeout(
+        () => tone(659, .09),
+        90
+    );
+
+    setTimeout(
+        () => tone(784, .14),
+        180
+    );
+
+}
+
+
+/* LOSS */
+
+function sfxLoss() {
+
+    if (!soundEnabled)
+        return;
+
+    tone(
+        240,
+        .13,
+        "sawtooth",
+        .025
+    );
+
+    setTimeout(
+        () => {
+
+            tone(
+                180,
+                .18,
+                "sawtooth",
+                .02
+            );
+
+        },
+        110
+    );
+
+}
+
+
+/* SECRET UNLOCK */
+
+function sfxSecret() {
+
+    if (!soundEnabled)
+        return;
+
+    tone(
+        523,
+        .12,
+        "triangle",
+        .05
+    );
+
+    setTimeout(
+        () => tone(
+            659,
+            .12,
+            "triangle",
+            .05
+        ),
+        120
+    );
+
+    setTimeout(
+        () => tone(
+            784,
+            .14,
+            "triangle",
+            .05
+        ),
+        240
+    );
+
+    setTimeout(
+        () => tone(
+            1047,
+            .25,
+            "triangle",
+            .05
+        ),
+        360
+    );
+
+}
+
+
+/* =========================================================
+   ACHIEVEMENT AUDIO
+========================================================= */
+
+function playAchievementSound() {
+
+    if (!soundEnabled)
+        return;
+
+    const audio =
+        document.getElementById(
+            "achievementSound"
+        );
+
+    audio.currentTime = 0;
+
+    audio.play().catch(
+        () => {}
+    );
+
+}
+
+
+/* =========================================================
+   SOUND BUTTON
+========================================================= */
+
+function toggleSound() {
+
+    soundEnabled =
+        !soundEnabled;
+
+    document.getElementById(
+        "soundButton"
+    ).textContent =
+        soundEnabled
+            ? "🔊 Sound On"
+            : "🔇 Sound Off";
+
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+function setResult(
+    text,
+    type = ""
+) {
+
+    const result =
+        document.getElementById(
+            "result"
+        );
+
+    result.className =
+        "result";
+
+    if (type) {
+
+        void result.offsetWidth;
+
+        result.classList.add(
+            type
+        );
+
+    }
+
+    result.textContent =
+        text;
+
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+function setStatus(text) {
+
+    document.getElementById(
+        "gameStatus"
+    ).textContent =
+        text;
 
 }
 
@@ -1354,11 +2328,16 @@ function updateUI() {
 
 function openCoinFlip() {
 
-    playClick();
+    sfxClick();
 
     document.getElementById(
         "gameTitle"
-    ).textContent = "Coin Flip";
+    ).textContent =
+        "Coin Flip";
+
+    setStatus(
+        "Heads or Tails"
+    );
 
     document.getElementById(
         "gameArea"
@@ -1371,21 +2350,21 @@ function openCoinFlip() {
             ?
         </div>
 
-        <div class="game-instruction">
+        <p class="instruction">
             Pick a side.
-        </div>
+        </p>
 
         <div class="choice-row">
 
             <button
-                class="choice-button"
+                class="choice"
                 onclick="coinFlip('Heads')"
             >
                 Heads
             </button>
 
             <button
-                class="choice-button"
+                class="choice"
                 onclick="coinFlip('Tails')"
             >
                 Tails
@@ -1394,7 +2373,9 @@ function openCoinFlip() {
         </div>
     `;
 
-    setResult("Ready.", "");
+    setResult(
+        "Ready."
+    );
 
 }
 
@@ -1402,37 +2383,59 @@ function openCoinFlip() {
 function coinFlip(choice) {
 
     const coin =
-        document.getElementById("coin");
+        document.getElementById(
+            "coin"
+        );
 
-    if (!coin) return;
+    if (!coin)
+        return;
 
-    playClick();
+    sfxClick();
 
-    coin.classList.remove("flipping");
+    coin.classList.remove(
+        "flip"
+    );
 
     void coin.offsetWidth;
 
-    coin.classList.add("flipping");
+    coin.classList.add(
+        "flip"
+    );
 
     const result =
-        Math.random() < 0.5
+        Math.random() < .5
             ? "Heads"
             : "Tails";
 
-    setTimeout(() => {
-
-        coin.textContent =
-            result === "Heads"
-                ? "H"
-                : "T";
-
-        finishGame(
-            choice === result,
-            "Coin Flip",
-            `You chose ${choice}. It landed on ${result}.`
+    let interval =
+        setInterval(
+            sfxCoin,
+            170
         );
 
-    }, 850);
+    setTimeout(
+        () => {
+
+            clearInterval(
+                interval
+            );
+
+            coin.textContent =
+                result === "Heads"
+                    ? "H"
+                    : "T";
+
+            finishGame(
+                choice === result,
+
+                "Coin Flip",
+
+                `You chose ${choice}. It landed on ${result}.`
+            );
+
+        },
+        850
+    );
 
 }
 
@@ -1443,11 +2446,16 @@ function coinFlip(choice) {
 
 function openDice() {
 
-    playClick();
+    sfxClick();
 
     document.getElementById(
         "gameTitle"
-    ).textContent = "Dice Roll";
+    ).textContent =
+        "Dice Roll";
+
+    setStatus(
+        "Choose 1 - 6"
+    );
 
     document.getElementById(
         "gameArea"
@@ -1460,23 +2468,31 @@ function openDice() {
             ?
         </div>
 
-        <div class="game-instruction">
+        <p class="instruction">
             Pick a number.
-        </div>
+        </p>
 
         <div class="choice-row">
 
-            <button class="choice-button" onclick="diceRoll(1)">1</button>
-            <button class="choice-button" onclick="diceRoll(2)">2</button>
-            <button class="choice-button" onclick="diceRoll(3)">3</button>
-            <button class="choice-button" onclick="diceRoll(4)">4</button>
-            <button class="choice-button" onclick="diceRoll(5)">5</button>
-            <button class="choice-button" onclick="diceRoll(6)">6</button>
+            ${[1,2,3,4,5,6]
+                .map(
+                    number => `
+                        <button
+                            class="choice"
+                            onclick="diceRoll(${number})"
+                        >
+                            ${number}
+                        </button>
+                    `
+                )
+                .join("")}
 
         </div>
     `;
 
-    setResult("Ready.", "");
+    setResult(
+        "Ready."
+    );
 
 }
 
@@ -1484,32 +2500,57 @@ function openDice() {
 function diceRoll(choice) {
 
     const dice =
-        document.getElementById("dice");
+        document.getElementById(
+            "dice"
+        );
 
-    if (!dice) return;
+    if (!dice)
+        return;
 
-    playClick();
+    sfxClick();
 
-    dice.classList.remove("rolling");
+    dice.classList.remove(
+        "roll"
+    );
 
     void dice.offsetWidth;
 
-    dice.classList.add("rolling");
+    dice.classList.add(
+        "roll"
+    );
 
-    const result =
-        Math.floor(Math.random() * 6) + 1;
-
-    setTimeout(() => {
-
-        dice.textContent = result;
-
-        finishGame(
-            choice === result,
-            "Dice Roll",
-            `You chose ${choice}. The dice rolled ${result}.`
+    let interval =
+        setInterval(
+            sfxDice,
+            120
         );
 
-    }, 750);
+    const result =
+        Math.floor(
+            Math.random() * 6
+        ) + 1;
+
+    setTimeout(
+        () => {
+
+            clearInterval(
+                interval
+            );
+
+            dice.textContent =
+                result;
+
+            finishGame(
+                choice === result,
+
+                "Dice Roll",
+
+                `You chose ${choice}. The dice rolled ${result}.`
+            );
+
+        },
+        750
+    );
 
 }
 
@@ -1520,11 +2561,16 @@ function diceRoll(choice) {
 
 function openLuckyNumber() {
 
-    playClick();
+    sfxClick();
 
     document.getElementById(
         "gameTitle"
-    ).textContent = "Lucky Number";
+    ).textContent =
+        "Lucky Number";
+
+    setStatus(
+        "Choose 1 - 10"
+    );
 
     document.getElementById(
         "gameArea"
@@ -1537,28 +2583,32 @@ function openLuckyNumber() {
             ?
         </div>
 
-        <div class="game-instruction">
-            Pick a number from 1 to 10.
-        </div>
+        <p class="instruction">
+            Pick one number.
+        </p>
 
         <div class="choice-row">
 
             ${Array.from(
-                { length: 10 },
-                (_, i) => `
+                {length:10},
+                (_,i) => `
+
                     <button
-                        class="choice-button"
-                        onclick="luckyNumber(${i + 1})"
+                        class="choice"
+                        onclick="luckyNumber(${i+1})"
                     >
-                        ${i + 1}
+                        ${i+1}
                     </button>
+
                 `
             ).join("")}
 
         </div>
     `;
 
-    setResult("Ready.", "");
+    setResult(
+        "Ready."
+    );
 
 }
 
@@ -1570,49 +2620,63 @@ function luckyNumber(choice) {
             "numberDisplay"
         );
 
-    if (!display) return;
+    if (!display)
+        return;
 
-    playClick();
+    sfxClick();
 
-    display.classList.remove("spinning");
+    display.classList.remove(
+        "spin"
+    );
 
     void display.offsetWidth;
 
-    display.classList.add("spinning");
+    display.classList.add(
+        "spin"
+    );
 
     let counter = 0;
 
     const interval =
-        setInterval(() => {
+        setInterval(
+            () => {
 
-            display.textContent =
-                Math.floor(
-                    Math.random() * 10
-                ) + 1;
-
-            counter++;
-
-            if (counter >= 8) {
-
-                clearInterval(interval);
-
-                const result =
+                display.textContent =
                     Math.floor(
                         Math.random() * 10
                     ) + 1;
 
-                display.textContent =
-                    result;
+                sfxNumber();
 
-                finishGame(
-                    choice === result,
-                    "Lucky Number",
-                    `You chose ${choice}. The lucky number was ${result}.`
-                );
+                counter++;
 
-            }
+                if (counter >= 9) {
 
-        }, 90);
+                    clearInterval(
+                        interval
+                    );
+
+                    const result =
+                        Math.floor(
+                            Math.random() * 10
+                        ) + 1;
+
+                    display.textContent =
+                        result;
+
+                    finishGame(
+                        choice === result,
+
+                        "Lucky Number",
+
+                        `You chose ${choice}. The lucky number was ${result}.`
+                    );
+
+                }
+
+            },
+            85
+        );
 
 }
 
@@ -1633,38 +2697,53 @@ function finishGame(
 
         gameData.wins++;
 
-        playWinSound();
+        sfxWin();
 
         setResult(
-            message + " You won!",
+            message +
+            " You won!",
             "win"
         );
 
         addHistory(
-            `✓ ${gameName}: ${message}`
+            `✓ ${gameName}: ${message}`,
+            "win"
         );
 
-        if (Math.random() < 0.05) {
+        createConfetti();
 
-            unlockBinnou();
+        /*
+            5% chance of Binnou
+            after a normal win.
+        */
+
+        if (
+            !gameData.binnouWon &&
+            Math.random() < .05
+        ) {
+
+            setTimeout(
+                unlockBinnou,
+                350
+            );
 
         }
-
-        createConfetti();
 
     } else {
 
         gameData.losses++;
 
-        playLossSound();
+        sfxLoss();
 
         setResult(
-            message + " Better luck next time.",
+            message +
+            " Better luck next time.",
             "loss"
         );
 
         addHistory(
-            `✗ ${gameName}: ${message}`
+            `✗ ${gameName}: ${message}`,
+            "loss"
         );
 
     }
@@ -1677,32 +2756,47 @@ function finishGame(
 
 
 /* =========================================================
-   BINNOU
+   BINNOU UNLOCK
 ========================================================= */
 
 function unlockBinnou() {
 
-    if (gameData.binnouWon) return;
+    if (gameData.binnouWon)
+        return;
 
-    gameData.binnouWon = true;
+    gameData.binnouWon =
+        true;
 
     addHistory(
-        "★ YOU FOUND THE BINNOU IMAGE!"
+        "★ BINNOU IMAGE UNLOCKED!",
+        "special"
     );
 
-    playWinSound();
+    sfxSecret();
 
-    setTimeout(() => {
+    createConfetti();
 
-        showToast(
-            "Binnou Found!",
-            "You unlocked the Binnou image."
-        );
+    setTimeout(
+        () => {
 
-    }, 250);
+            showToast(
+                "Binnou Found!",
+                "You unlocked the secret Binnou image.",
+                true
+            );
+
+        },
+        200
+    );
+
+    updateUI();
 
 }
 
+
+/* =========================================================
+   REWARD UI
+========================================================= */
 
 function updateReward() {
 
@@ -1711,37 +2805,31 @@ function updateReward() {
             "binnouReward"
         );
 
-    if (!gameData.binnouWon) {
+    if (
+        !gameData.binnouWon
+    ) {
 
         container.innerHTML = `
 
-            <div class="lock">
+            <div class="reward-lock">
                 🔒
             </div>
 
-            <div class="hidden-reward">
-                The Binnou image is still locked.
+            <div class="reward-title">
+                Binnou is locked
             </div>
 
-            <div class="hidden-reward">
-                Win games for a chance to find it.
+            <div class="reward-text">
+                Win a game for a chance to unlock it.
             </div>
 
         `;
 
         return;
+
     }
 
     container.innerHTML = `
-
-        <div
-            style="
-                font-weight:bold;
-                margin-bottom:12px;
-            "
-        >
-            Binnou unlocked!
-        </div>
 
         <img
             class="binnou-image"
@@ -1749,19 +2837,31 @@ function updateReward() {
             alt="Binnou"
             onerror="
                 this.style.display='none';
-                document.getElementById('missingImage').style.display='block';
+                document.getElementById('missingBinnou').style.display='block';
             "
         >
 
         <div
-            id="missingImage"
+            id="missingBinnou"
             style="
                 display:none;
+                margin-top:15px;
                 color:#777;
             "
         >
-            <b>binnou.png</b> was not found.<br>
+            <b>binnou.png</b> is missing.<br>
             Put it beside index.html.
+        </div>
+
+        <div
+            class="reward-title"
+            style="margin-top:14px;"
+        >
+            Binnou Unlocked
+        </div>
+
+        <div class="reward-text">
+            You found the secret image.
         </div>
 
     `;
@@ -1773,13 +2873,12 @@ function updateReward() {
    ACHIEVEMENTS
 ========================================================= */
 
-function getAchievementProgress(
+function getProgress(
     achievement
 ) {
 
     if (
-        achievement.type === "wins" ||
-        achievement.type === "custom"
+        achievement.type === "wins"
     ) {
 
         return gameData.wins;
@@ -1801,6 +2900,18 @@ function getAchievementProgress(
 }
 
 
+function rarityClass(
+    rarity
+) {
+
+    return (
+        "rarity-" +
+        rarity.toLowerCase()
+    );
+
+}
+
+
 function updateAchievements() {
 
     const container =
@@ -1810,76 +2921,118 @@ function updateAchievements() {
 
     container.innerHTML = "";
 
-    gameData.achievements.forEach(
-        achievement => {
+    let completedCount = 0;
 
-            const progress =
-                getAchievementProgress(
-                    achievement
-                );
+    gameData.achievements
+        .forEach(
+            achievement => {
 
-            const percentage =
-                Math.min(
-                    100,
+                const progress =
+                    getProgress(
+                        achievement
+                    );
+
+                const completed =
+                    progress >=
+                    achievement.requirement;
+
+                if (completed)
+                    completedCount++;
+
+                const percentage =
+                    Math.min(
+                        100,
+                        (
+                            progress /
+                            achievement.requirement
+                        ) * 100
+                    );
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+                div.className =
+                    "achievement" +
                     (
-                        progress /
-                        achievement.requirement
-                    ) * 100
-                );
+                        completed
+                            ? " completed"
+                            : ""
+                    );
 
-            const completed =
-                progress >=
-                achievement.requirement;
+                div.innerHTML = `
 
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-            div.className =
-                "achievement" +
-                (
-                    completed
-                        ? " completed"
-                        : ""
-                );
-
-            div.innerHTML = `
-
-                <div class="achievement-name">
-                    ${escapeHTML(
-                        achievement.name
-                    )}
-                </div>
-
-                <div class="achievement-description">
-                    ${escapeHTML(
-                        achievement.description
-                    )}
-                </div>
-
-                <div class="achievement-progress">
                     <div
-                        class="achievement-bar"
-                        style="width:${percentage}%"
-                    ></div>
-                </div>
+                        class="achievement-name"
+                    >
+                        ${escapeHTML(
+                            achievement.name
+                        )}
+                    </div>
 
-                <div class="achievement-count">
-                    ${Math.min(
-                        progress,
-                        achievement.requirement
-                    )}
-                    /
-                    ${achievement.requirement}
-                </div>
+                    <div
+                        class="
+                            achievement-rarity
+                            ${rarityClass(
+                                achievement.rarity
+                            )}
+                        "
+                    >
+                        ${achievement.rarity}
+                    </div>
 
-            `;
+                    <div
+                        class="
+                            achievement-description
+                        "
+                    >
+                        ${escapeHTML(
+                            achievement.description
+                        )}
+                    </div>
 
-            container.appendChild(div);
+                    <div
+                        class="progress"
+                    >
+                        <div
+                            class="progress-bar"
+                            style="
+                                width:${percentage}%
+                            "
+                        ></div>
+                    </div>
 
-        }
-    );
+                    <div
+                        class="progress-text"
+                    >
+                        ${Math.min(
+                            progress,
+                            achievement.requirement
+                        )}
+                        /
+                        ${achievement.requirement}
+                    </div>
+
+                    <div
+                        class="achievement-check"
+                    >
+                        ✓
+                    </div>
+
+                `;
+
+                container.appendChild(
+                    div
+                );
+
+            }
+        );
+
+    document.getElementById(
+        "achievementCount"
+    ).textContent =
+        `${completedCount}/${gameData.achievements.length}`;
 
 }
 
@@ -1890,100 +3043,59 @@ function updateAchievements() {
 
 function checkAchievements() {
 
-    gameData.achievements.forEach(
-        achievement => {
+    gameData.achievements
+        .forEach(
+            achievement => {
 
-            const progress =
-                getAchievementProgress(
-                    achievement
-                );
+                const progress =
+                    getProgress(
+                        achievement
+                    );
 
-            if (
-                progress >=
-                achievement.requirement &&
-                !achievement.completed
-            ) {
+                if (
+                    progress >=
+                    achievement.requirement &&
+                    !achievement.completed
+                ) {
 
-                achievement.completed = true;
+                    achievement.completed =
+                        true;
 
-                playAchievementSound();
+                    setTimeout(
+                        () => {
 
-                showAchievementToast(
-                    achievement
-                );
+                            playAchievementSound();
 
-                createConfetti();
+                            showToast(
+                                "Achievement Unlocked",
+                                achievement.name +
+                                " — " +
+                                achievement.description,
+                                true
+                            );
+
+                            createConfetti();
+
+                        },
+                        100
+                    );
+
+                }
 
             }
-
-        }
-    );
+        );
 
 }
 
 
 /* =========================================================
-   ACHIEVEMENT TOAST
-========================================================= */
-
-function showAchievementToast(
-    achievement
-) {
-
-    const container =
-        document.getElementById(
-            "toastContainer"
-        );
-
-    const toast =
-        document.createElement(
-            "div"
-        );
-
-    toast.className = "toast";
-
-    toast.innerHTML = `
-
-        <div class="toast-title">
-            Achievement Unlocked
-        </div>
-
-        <div>
-            ${escapeHTML(
-                achievement.name
-            )}
-        </div>
-
-        <div class="toast-description">
-            ${escapeHTML(
-                achievement.description
-            )}
-        </div>
-
-    `;
-
-    container.appendChild(toast);
-
-    setTimeout(() => {
-
-        toast.classList.add("hide");
-
-        setTimeout(() => {
-            toast.remove();
-        }, 350);
-
-    }, 3500);
-
-}
-
-
-/* =========================================================
-   NORMAL TOAST
+   TOAST
 ========================================================= */
 
 function showToast(
     title,
-    description
+    description,
+    achievement = false
 ) {
 
     const container =
@@ -1996,9 +3108,23 @@ function showToast(
             "div"
         );
 
-    toast.className = "toast";
+    toast.className =
+        "toast" +
+        (
+            achievement
+                ? " achievement"
+                : ""
+        );
 
     toast.innerHTML = `
+
+        <div class="toast-badge">
+            ${
+                achievement
+                    ? "Achievement"
+                    : "Notification"
+            }
+        </div>
 
         <div class="toast-title">
             ${escapeHTML(title)}
@@ -2010,17 +3136,25 @@ function showToast(
 
     `;
 
-    container.appendChild(toast);
+    container.appendChild(
+        toast
+    );
 
-    setTimeout(() => {
+    setTimeout(
+        () => {
 
-        toast.classList.add("hide");
+            toast.classList.add(
+                "hide"
+            );
 
-        setTimeout(() => {
-            toast.remove();
-        }, 350);
+            setTimeout(
+                () => toast.remove(),
+                350
+            );
 
-    }, 3000);
+        },
+        3500
+    );
 
 }
 
@@ -2031,9 +3165,18 @@ function showToast(
 
 function createConfetti() {
 
+    const colors = [
+        "#5865f2",
+        "#7c55c9",
+        "#e0aa24",
+        "#3ca66b",
+        "#e05b5b",
+        "#4d8bd8"
+    ];
+
     for (
         let i = 0;
-        i < 25;
+        i < 28;
         i++
     ) {
 
@@ -2046,57 +3189,36 @@ function createConfetti() {
             "confetti";
 
         piece.style.left =
-            Math.random() * 100 + "vw";
+            Math.random() * 100 +
+            "vw";
+
+        piece.style.background =
+            colors[
+                Math.floor(
+                    Math.random() *
+                    colors.length
+                )
+            ];
 
         piece.style.animationDelay =
-            Math.random() * 0.3 + "s";
+            Math.random() * .25 +
+            "s";
 
         piece.style.transform =
-            `rotate(${Math.random() * 360}deg)`;
+            `rotate(
+                ${Math.random() * 360}deg
+            )`;
 
         document.body.appendChild(
             piece
         );
 
-        setTimeout(() => {
-
-            piece.remove();
-
-        }, 1600);
-
-    }
-
-}
-
-
-/* =========================================================
-   RESULT
-========================================================= */
-
-function setResult(
-    text,
-    type
-) {
-
-    const result =
-        document.getElementById(
-            "result"
-        );
-
-    result.className =
-        "result";
-
-    if (type) {
-
-        void result.offsetWidth;
-
-        result.classList.add(
-            type
+        setTimeout(
+            () => piece.remove(),
+            1600
         );
 
     }
-
-    result.textContent = text;
 
 }
 
@@ -2105,9 +3227,15 @@ function setResult(
    HISTORY
 ========================================================= */
 
-function addHistory(text) {
+function addHistory(
+    text,
+    type = ""
+) {
 
-    gameData.history.unshift(text);
+    gameData.history.unshift({
+        text: text,
+        type: type
+    });
 
     if (
         gameData.history.length > 50
@@ -2122,7 +3250,7 @@ function addHistory(text) {
 
 function updateHistory() {
 
-    const history =
+    const container =
         document.getElementById(
             "history"
         );
@@ -2131,10 +3259,10 @@ function updateHistory() {
         gameData.history.length === 0
     ) {
 
-        history.innerHTML = `
+        container.innerHTML = `
 
             <div class="history-item">
-                No games played yet.
+                Nothing here yet. Play a game.
             </div>
 
         `;
@@ -2143,134 +3271,72 @@ function updateHistory() {
 
     }
 
-    history.innerHTML =
+    container.innerHTML =
         gameData.history
-            .map(item => `
+            .map(
+                item => `
 
-                <div
-                    class="history-item"
-                >
-                    ${escapeHTML(item)}
-                </div>
+                    <div
+                        class="
+                            history-item
+                            ${
+                                item.type === "win"
+                                    ? "history-win"
+                                    : ""
+                            }
+                            ${
+                                item.type === "special"
+                                    ? "history-special"
+                                    : ""
+                            }
+                        "
+                    >
+                        ${escapeHTML(
+                            item.text
+                        )}
+                    </div>
 
-            `)
+                `
+            )
             .join("");
 
 }
 
 
 /* =========================================================
-   CUSTOM ACHIEVEMENT
+   STATS
 ========================================================= */
 
-function createAchievement() {
-
-    const name =
-        document.getElementById(
-            "achievementName"
-        ).value.trim();
-
-    const description =
-        document.getElementById(
-            "achievementDescription"
-        ).value.trim();
-
-    const requirement =
-        Number(
-            document.getElementById(
-                "achievementRequirement"
-            ).value
-        );
-
-    if (!name) {
-
-        alert(
-            "Enter an achievement name."
-        );
-
-        return;
-
-    }
-
-    if (!description) {
-
-        alert(
-            "Enter an achievement description."
-        );
-
-        return;
-
-    }
-
-    if (
-        !Number.isInteger(requirement) ||
-        requirement < 1
-    ) {
-
-        alert(
-            "Enter a valid win requirement."
-        );
-
-        return;
-
-    }
-
-
-    gameData.achievements.push({
-
-        id: Date.now(),
-
-        name: name,
-
-        description: description,
-
-        requirement: requirement,
-
-        type: "custom",
-
-        completed: false
-
-    });
-
+function updateStats() {
 
     document.getElementById(
-        "achievementName"
-    ).value = "";
+        "gamesPlayed"
+    ).textContent =
+        gameData.totalGames;
 
     document.getElementById(
-        "achievementDescription"
-    ).value = "";
-
-    document.getElementById(
-        "achievementRequirement"
-    ).value = 10;
-
-
-    playAchievementSound();
-
-    addHistory(
-        `Created achievement: ${name}`
-    );
-
-    updateUI();
+        "wins"
+    ).textContent =
+        gameData.wins;
 
 }
 
 
 /* =========================================================
-   ESCAPE HTML
+   UI
 ========================================================= */
 
-function escapeHTML(text) {
+function updateUI() {
 
-    const div =
-        document.createElement(
-            "div"
-        );
+    updateStats();
 
-    div.textContent = text;
+    updateAchievements();
 
-    return div.innerHTML;
+    updateReward();
+
+    updateHistory();
+
+    saveGame();
 
 }
 
@@ -2281,21 +3347,40 @@ function escapeHTML(text) {
 
 function resetGame() {
 
-    if (
-        !confirm(
-            "Reset all game progress?"
-        )
-    ) {
+    const confirmed =
+        confirm(
+            "Reset all Binnou Chance Game progress?"
+        );
 
+    if (!confirmed)
         return;
-
-    }
 
     localStorage.removeItem(
         STORAGE_KEY
     );
 
     location.reload();
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(
+    text
+) {
+
+    const element =
+        document.createElement(
+            "div"
+        );
+
+    element.textContent =
+        text;
+
+    return element.innerHTML;
 
 }
 
