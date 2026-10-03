@@ -1,2040 +1,797 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Gamble for a Chance to Win a Binnou Image</title>
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
-
 * {
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+:root {
+    --bg: #0f1117;
+    --panel: #181c25;
+    --panel2: #202532;
+    --border: #303746;
+    --text: #f5f7fb;
+    --muted: #9ca6b8;
+    --blue: #4da3ff;
+    --cyan: #52d9ff;
+    --green: #55d98b;
+    --red: #ff657a;
+    --yellow: #ffd45c;
+    --purple: #a77bff;
 }
 
 body {
     margin: 0;
     min-height: 100vh;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    color: #20242b;
-
+    font-family: Arial, Helvetica, sans-serif;
     background:
-        radial-gradient(
-            circle at 15% 15%,
-            rgba(87, 166, 255, 0.15),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(151, 92, 255, 0.12),
-            transparent 30%
-        ),
-        #edf1f5;
-
-    overflow-x: hidden;
+        radial-gradient(circle at top, #1b2940 0%, var(--bg) 45%);
+    color: var(--text);
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-.header {
-    position: sticky;
-    top: 0;
-
-    z-index: 100;
-
-    background: rgba(26, 30, 36, 0.96);
-
-    border-bottom:
-        1px solid rgba(255,255,255,0.08);
-
-    backdrop-filter: blur(8px);
+button {
+    font: inherit;
 }
 
-.header-inner {
-    max-width: 1120px;
-
-    margin: auto;
-
-    padding:
-        13px
-        18px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
+header {
+    padding: 35px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: rgba(15, 17, 23, .9);
 }
 
-.logo {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    color: white;
-
-    font-size: 19px;
-
-    font-weight: 800;
-}
-
-.logo-icon {
-    width: 34px;
-    height: 34px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: #5865f2;
-
-    border-radius: 8px;
-
-    box-shadow:
-        0 4px 12px
-        rgba(88,101,242,0.35);
-}
-
-.logo-small {
-    color: #9ca3af;
-
-    font-weight: 500;
-}
-
-.sound-button {
-    border: 1px solid #454b55;
-
-    background: #292e36;
-
-    color: white;
-
-    padding:
-        8px
-        12px;
-
-    border-radius: 6px;
-
-    cursor: pointer;
-
-    transition:
-        background .15s,
-        transform .15s;
-}
-
-.sound-button:hover {
-    background: #343a44;
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main {
-    width: 100%;
-
-    max-width: 1120px;
-
-    margin: auto;
-
-    padding:
-        28px
-        16px
-        60px;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-    position: relative;
-
-    overflow: hidden;
-
-    padding: 32px;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #252a33,
-            #303846
-        );
-
-    color: white;
-
-    border:
-        1px solid #414957;
-
-    box-shadow:
-        0 12px 30px
-        rgba(25,30,38,0.16);
-
-    margin-bottom: 18px;
-}
-
-.hero::before {
-    content: "";
-
-    position: absolute;
-
-    width: 260px;
-    height: 260px;
-
-    right: -100px;
-    top: -130px;
-
-    border-radius: 50%;
-
-    background:
-        rgba(88,101,242,0.18);
-}
-
-.hero-content {
-    position: relative;
-
-    z-index: 1;
-}
-
-.hero h1 {
-    margin:
-        0
-        0
-        9px;
-
-    font-size:
-        clamp(25px, 4vw, 38px);
-
-    line-height: 1.1;
-}
-
-.hero p {
-    max-width: 700px;
-
+header h1 {
     margin: 0;
-
-    color: #c7ccd4;
-
-    line-height: 1.55;
+    font-size: 32px;
 }
 
-.warning {
-    display: inline-block;
-
-    margin-top: 17px;
-
-    padding:
-        7px
-        10px;
-
-    border-radius: 5px;
-
-    background:
-        rgba(255,255,255,0.08);
-
-    color: #d9dde4;
-
-    font-size: 12px;
+header p {
+    color: var(--muted);
+    margin: 10px 0 0;
 }
 
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.stats {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 12px;
-
-    margin-bottom: 18px;
+.container {
+    width: min(1150px, calc(100% - 30px));
+    margin: 25px auto 50px;
 }
 
-.stat {
-    padding: 16px;
-
-    background: white;
-
-    border:
-        1px solid #d8dde4;
-
-    border-radius: 9px;
-
-    box-shadow:
-        0 3px 12px
-        rgba(30,40,50,0.05);
+.section {
+    margin-bottom: 25px;
 }
-
-.stat-label {
-    color: #737b86;
-
-    font-size: 12px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .5px;
-}
-
-.stat-value {
-    margin-top: 5px;
-
-    font-size: 25px;
-
-    font-weight: 800;
-}
-
-
-/* =========================================================
-   SECTION TITLES
-========================================================= */
 
 .section-title {
-    margin:
-        25px
-        0
-        11px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-}
-
-.section-title h2 {
-    margin: 0;
-
     font-size: 21px;
+    margin-bottom: 14px;
 }
-
-.section-title span {
-    color: #858c96;
-
-    font-size: 13px;
-}
-
-
-/* =========================================================
-   GAME CARDS
-========================================================= */
 
 .games {
     display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
 
-.game-card {
-    position: relative;
-
-    overflow: hidden;
-
-    background: white;
-
-    border:
-        1px solid #d8dde4;
-
-    border-radius: 11px;
-
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
     padding: 20px;
-
-    cursor: pointer;
-
-    transition:
-        transform .18s ease,
-        box-shadow .18s ease,
-        border-color .18s ease;
+    transition: .2s;
 }
 
-.game-card::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    right: 0;
-
-    top: 0;
-
-    height: 3px;
-
-    background: var(--game-color);
-}
-
-.game-card:hover {
-    transform:
-        translateY(-5px);
-
-    border-color:
-        var(--game-color);
-
-    box-shadow:
-        0 12px 25px
-        rgba(30,40,50,0.11);
-}
-
-.game-card:active {
-    transform:
-        translateY(-1px);
+.card:hover {
+    transform: translateY(-2px);
+    border-color: #46546c;
 }
 
 .game-icon {
-    width: 55px;
-    height: 55px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 12px;
-
-    background:
-        var(--game-bg);
-
-    font-size: 28px;
-
-    margin-bottom: 13px;
-}
-
-.game-card h3 {
-    margin:
-        0
-        0
-        7px;
-
-    font-size: 19px;
-}
-
-.game-card p {
-    min-height: 45px;
-
-    margin:
-        0
-        0
-        15px;
-
-    color: #737b86;
-
-    font-size: 14px;
-
-    line-height: 1.45;
-}
-
-.game-button {
-    width: 100%;
-
-    padding:
-        10px
-        12px;
-
-    border: 0;
-
-    border-radius: 6px;
-
-    background:
-        var(--game-color);
-
-    color: white;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        filter .15s,
-        transform .15s;
-}
-
-.game-button:hover {
-    filter: brightness(1.08);
-}
-
-.game-button:active {
-    transform: scale(.98);
-}
-
-
-/* =========================================================
-   GAME PANEL
-========================================================= */
-
-.panel {
-    margin-top: 18px;
-
-    padding: 21px;
-
-    background: white;
-
-    border:
-        1px solid #d8dde4;
-
-    border-radius: 11px;
-
-    box-shadow:
-        0 3px 12px
-        rgba(30,40,50,0.04);
-}
-
-.panel-header {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-bottom: 15px;
-}
-
-.panel-header h2 {
-    margin: 0;
-
-    font-size: 20px;
-}
-
-.game-status {
-    color: #7b838d;
-
-    font-size: 12px;
-}
-
-.game-area {
+    font-size: 42px;
     text-align: center;
-
-    padding:
-        8px
-        0
-        5px;
+    margin-bottom: 8px;
 }
 
-.instruction {
-    color: #737b86;
-
-    margin:
-        5px
-        0
-        18px;
+.card h3 {
+    text-align: center;
+    margin: 8px 0;
 }
 
-.choice-row {
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
+.card p {
+    color: var(--muted);
+    text-align: center;
+    font-size: 14px;
 }
 
-.choice {
-    min-width: 60px;
-
-    padding:
-        10px
-        14px;
-
-    background: white;
-
-    color: #272c33;
-
-    border:
-        1px solid #c8ced6;
-
-    border-radius: 6px;
-
-    font-weight: 700;
-
+.play-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 12px;
     cursor: pointer;
-
-    transition:
-        background .13s,
-        border-color .13s,
-        transform .13s;
+    color: white;
+    background: var(--blue);
+    font-weight: bold;
+    transition: .15s;
 }
 
-.choice:hover {
-    background: #f1f3f5;
-
-    border-color: #8e97a3;
-
-    transform:
-        translateY(-2px);
+.play-btn:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
 }
 
-.choice:active {
-    transform:
-        translateY(0);
+.play-btn:active {
+    transform: scale(.97);
 }
-
-
-/* =========================================================
-   RESULT
-========================================================= */
 
 .result {
-    min-height: 86px;
-
-    margin-top: 18px;
-
+    min-height: 42px;
+    margin-top: 15px;
     display: flex;
-
-    align-items: center;
-
     justify-content: center;
-
+    align-items: center;
     text-align: center;
-
-    padding: 15px;
-
-    border-radius: 8px;
-
-    border:
-        1px dashed #c5cbd3;
-
-    background: #f8f9fa;
-
-    color: #5d6671;
-
-    font-weight: 700;
-
-    transition:
-        background .2s,
-        border-color .2s;
+    font-weight: bold;
 }
 
-.result.win {
-    background: #ecfdf3;
-
-    border-color: #73c995;
-
-    color: #167342;
-
-    animation:
-        resultWin .5s ease;
+.win {
+    color: var(--green);
 }
 
-.result.loss {
-    background: #fff2f2;
-
-    border-color: #e49a9a;
-
-    color: #a13232;
-
-    animation:
-        resultLoss .42s ease;
+.loss {
+    color: var(--red);
 }
 
-@keyframes resultWin {
-
-    0% {
-        opacity: 0;
-        transform: scale(.94);
-    }
-
-    60% {
-        transform: scale(1.035);
-    }
-
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
 }
 
-@keyframes resultLoss {
-
-    0% {
-        transform: translateX(0);
-    }
-
-    20% {
-        transform: translateX(-7px);
-    }
-
-    40% {
-        transform: translateX(7px);
-    }
-
-    60% {
-        transform: translateX(-4px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-
-/* =========================================================
-   COIN
-========================================================= */
-
-.coin {
-    width: 105px;
-    height: 105px;
-
-    margin:
-        3px
-        auto
-        20px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffd966,
-            #d9a62b
-        );
-
-    border:
-        6px solid #a77c19;
-
-    color: #6b4e0e;
-
-    font-size: 27px;
-
-    font-weight: 900;
-
-    box-shadow:
-        inset 0 0 0 3px
-        rgba(255,255,255,.4),
-
-        0 7px 15px
-        rgba(0,0,0,.15);
-}
-
-.coin.flip {
-    animation:
-        coinFlip .85s ease;
-}
-
-@keyframes coinFlip {
-
-    0% {
-        transform:
-            rotateY(0)
-            scale(1);
-    }
-
-    50% {
-        transform:
-            rotateY(900deg)
-            scale(1.08);
-    }
-
-    100% {
-        transform:
-            rotateY(1800deg)
-            scale(1);
-    }
-}
-
-
-/* =========================================================
-   DICE
-========================================================= */
-
-.dice {
-    width: 95px;
-    height: 95px;
-
-    margin:
-        3px
-        auto
-        20px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: white;
-
-    border:
-        3px solid #343a40;
-
-    border-radius: 15px;
-
-    color: #252a30;
-
-    font-size: 46px;
-
-    font-weight: 900;
-
-    box-shadow:
-        0 7px 15px
-        rgba(0,0,0,.12);
-}
-
-.dice.roll {
-    animation:
-        diceRoll .75s ease;
-}
-
-@keyframes diceRoll {
-
-    0% {
-        transform:
-            rotate(0)
-            scale(1);
-    }
-
-    30% {
-        transform:
-            rotate(130deg)
-            scale(1.1);
-    }
-
-    60% {
-        transform:
-            rotate(260deg)
-            scale(.94);
-    }
-
-    100% {
-        transform:
-            rotate(360deg)
-            scale(1);
-    }
-}
-
-
-/* =========================================================
-   NUMBER
-========================================================= */
-
-.number-display {
-    height: 105px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 62px;
-
-    font-weight: 900;
-
-    color: #5865f2;
-}
-
-.number-display.spin {
-    animation:
-        numberSpin .65s ease;
-}
-
-@keyframes numberSpin {
-
-    0% {
-        transform:
-            scale(.65);
-
-        opacity: .2;
-    }
-
-    50% {
-        transform:
-            scale(1.18);
-
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            scale(1);
-    }
-}
-
-
-/* =========================================================
-   REWARD
-========================================================= */
-
-.reward-box {
-    min-height: 280px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
+.stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
     text-align: center;
 }
 
-.reward-lock {
-    width: 85px;
-    height: 85px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 13px;
-
-    border-radius: 50%;
-
-    background: #eef0f3;
-
-    font-size: 38px;
+.stat-number {
+    font-size: 30px;
+    font-weight: bold;
+    color: var(--cyan);
 }
 
-.reward-title {
-    font-size: 20px;
-
-    font-weight: 800;
-}
-
-.reward-text {
+.stat-label {
+    color: var(--muted);
     margin-top: 5px;
-
-    color: #7a828c;
-
-    font-size: 14px;
 }
 
-.binnou-image {
-    max-width: 300px;
-    max-height: 300px;
-
-    object-fit: contain;
-
-    border:
-        2px solid #5865f2;
-
-    border-radius: 10px;
-
-    padding: 6px;
-
-    background: #f5f6f8;
-
-    box-shadow:
-        0 12px 30px
-        rgba(88,101,242,.18);
-
-    animation:
-        binnouAppear .7s ease;
+.chart {
+    display: grid;
+    gap: 13px;
 }
 
-@keyframes binnouAppear {
-
-    0% {
-        opacity: 0;
-
-        transform:
-            scale(.55)
-            rotate(-8deg);
-    }
-
-    65% {
-        transform:
-            scale(1.08)
-            rotate(2deg);
-    }
-
-    100% {
-        opacity: 1;
-
-        transform:
-            scale(1)
-            rotate(0);
-    }
+.chance-row {
+    display: grid;
+    grid-template-columns: 150px 1fr 70px;
+    align-items: center;
+    gap: 12px;
 }
 
+.chance-name {
+    font-weight: bold;
+}
 
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
+.bar {
+    height: 13px;
+    background: #292f3c;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--blue), var(--cyan));
+}
+
+.chance-value {
+    text-align: right;
+    color: var(--muted);
+}
 
 .achievements {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
 }
 
 .achievement {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
     position: relative;
-
-    padding: 15px;
-
-    border:
-        1px solid #d8dde4;
-
-    border-radius: 8px;
-
-    background: #fafbfc;
-
-    transition:
-        transform .2s,
-        border-color .2s,
-        background .2s;
+    overflow: hidden;
 }
 
-.achievement.completed {
-    background: #f0fdf5;
-
-    border-color: #75c89a;
+.achievement.locked {
+    opacity: .48;
 }
 
-.achievement.completed:hover {
-    transform:
-        translateY(-2px);
+.achievement.unlocked {
+    border-color: #3d8f68;
+    background: #17251f;
 }
 
-.achievement-name {
-    padding-right: 80px;
-
-    font-size: 15px;
-
-    font-weight: 800;
+.achievement-icon {
+    font-size: 28px;
+    float: left;
+    margin-right: 12px;
 }
 
-.achievement-description {
-    margin-top: 5px;
+.achievement h3 {
+    margin: 3px 0 5px;
+    font-size: 16px;
+}
 
-    color: #737b86;
-
+.achievement p {
+    margin: 0;
+    color: var(--muted);
     font-size: 13px;
-
-    line-height: 1.4;
 }
 
-.achievement-rarity {
-    position: absolute;
-
-    top: 13px;
-    right: 13px;
-
-    padding:
-        4px
-        7px;
-
-    border-radius: 4px;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    text-transform: uppercase;
-
-    letter-spacing: .4px;
+.rarity {
+    display: inline-block;
+    margin-top: 9px;
+    font-size: 11px;
+    padding: 3px 7px;
+    border-radius: 5px;
+    background: #292f3c;
 }
 
-.rarity-common {
-    background: #e8edf2;
-    color: #59636e;
-}
-
-.rarity-uncommon {
-    background: #dff5e8;
-    color: #247548;
-}
-
-.rarity-rare {
-    background: #e2eaff;
-    color: #435bb0;
-}
-
-.rarity-epic {
-    background: #f0e4ff;
-    color: #7541a8;
-}
-
-.rarity-legendary {
-    background: #fff0c9;
-    color: #8a6515;
-}
-
-.achievement-check {
-    position: absolute;
-
-    right: 13px;
-    bottom: 13px;
-
-    width: 23px;
-    height: 23px;
-
+.activity {
     display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
+.activity-item {
+    padding: 12px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.reward {
+    text-align: center;
+    padding: 25px;
+}
+
+.binnou-image {
+    width: 190px;
+    max-width: 80%;
+    border-radius: 15px;
+    margin: 15px auto;
+    display: block;
+    box-shadow: 0 0 35px rgba(82, 217, 255, .2);
+}
+
+.hidden {
+    display: none;
+}
+
+.reset {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 9px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reset:hover {
+    color: white;
+    border-color: #58667e;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.toggle {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 9px 14px;
+    cursor: pointer;
+}
+
+.coin {
+    width: 82px;
+    height: 82px;
+    margin: auto;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #ffe27c, #c99b20);
+    border: 4px solid #fff0a9;
+    display: flex;
     align-items: center;
     justify-content: center;
-
-    border-radius: 50%;
-
-    background: #2da866;
-
-    color: white;
-
-    font-size: 13px;
-
-    opacity: 0;
-
-    transform:
-        scale(.5);
-
-    transition:
-        opacity .2s,
-        transform .2s;
+    color: #604900;
+    font-size: 24px;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
 }
 
-.achievement.completed
-.achievement-check {
-    opacity: 1;
-
-    transform:
-        scale(1);
+.coin.flip {
+    animation: coinFlip .8s ease;
 }
 
-.progress {
-    height: 6px;
-
-    margin-top: 11px;
-
-    overflow: hidden;
-
-    background: #e1e5e9;
-
-    border-radius: 5px;
+@keyframes coinFlip {
+    0% { transform: rotateY(0) scale(1); }
+    50% { transform: rotateY(900deg) scale(1.12); }
+    100% { transform: rotateY(1800deg) scale(1); }
 }
 
-.progress-bar {
-    height: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #5865f2,
-            #7c86ff
-        );
-
-    border-radius: 5px;
-
-    transition:
-        width .45s ease;
+.dice {
+    font-size: 65px;
+    text-align: center;
 }
 
-.progress-text {
-    margin-top: 5px;
-
-    color: #89919b;
-
-    font-size: 11px;
+.dice.roll {
+    animation: diceRoll .65s ease;
 }
 
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-.history {
-    max-height: 250px;
-
-    overflow-y: auto;
-
-    border:
-        1px solid #dce1e6;
-
-    border-radius: 7px;
+@keyframes diceRoll {
+    0% { transform: rotate(0) scale(1); }
+    30% { transform: rotate(90deg) scale(1.15); }
+    60% { transform: rotate(220deg) scale(.9); }
+    100% { transform: rotate(360deg) scale(1); }
 }
 
-.history-item {
-    padding:
-        10px
-        12px;
-
-    border-bottom:
-        1px solid #e5e8eb;
-
-    color: #59616b;
-
-    font-size: 13px;
+.lucky-number {
+    text-align: center;
+    font-size: 55px;
+    font-weight: bold;
+    color: var(--purple);
 }
 
-.history-item:last-child {
-    border-bottom: 0;
+.lucky-number.spin {
+    animation: numberSpin .6s ease;
 }
 
-.history-win {
-    color: #217748;
-
-    font-weight: 700;
-}
-
-.history-special {
-    background: #f3efff;
-
-    color: #6944a3;
-
-    font-weight: 800;
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-.toast-container {
-    position: fixed;
-
-    right: 18px;
-    bottom: 18px;
-
-    z-index: 1000;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
+@keyframes numberSpin {
+    0% { transform: scale(.5) rotate(-15deg); opacity: .3; }
+    60% { transform: scale(1.2) rotate(8deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); }
 }
 
 .toast {
-    width: 330px;
-
-    padding: 14px;
-
-    border-radius: 8px;
-
-    background:
-        #252a32;
-
-    color: white;
-
-    border:
-        1px solid #424a56;
-
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.25);
-
-    animation:
-        toastIn .35s ease;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #202631;
+    border: 1px solid #3a4558;
+    padding: 14px 17px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    transform: translateY(120px);
+    opacity: 0;
+    transition: .3s;
+    z-index: 20;
 }
 
-.toast.achievement {
-    border-left:
-        4px solid #8c63d9;
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
 }
-
-.toast-badge {
-    font-size: 11px;
-
-    color: #aeb5c0;
-
-    text-transform: uppercase;
-
-    letter-spacing: .6px;
-
-    font-weight: 800;
-}
-
-.toast-title {
-    margin-top: 3px;
-
-    font-weight: 800;
-}
-
-.toast-description {
-    margin-top: 3px;
-
-    color: #c4c9d0;
-
-    font-size: 12px;
-}
-
-.toast.hide {
-    animation:
-        toastOut .35s ease forwards;
-}
-
-@keyframes toastIn {
-
-    from {
-        transform:
-            translateX(120%);
-
-        opacity: 0;
-    }
-
-    to {
-        transform:
-            translateX(0);
-
-        opacity: 1;
-    }
-}
-
-@keyframes toastOut {
-
-    to {
-        transform:
-            translateX(120%);
-
-        opacity: 0;
-    }
-}
-
-
-/* =========================================================
-   CONFETTI
-========================================================= */
 
 .confetti {
     position: fixed;
-
-    top: -15px;
-
     width: 8px;
-    height: 12px;
-
-    z-index: 900;
-
-    pointer-events: none;
-
-    animation:
-        confettiFall 1.35s linear forwards;
+    height: 8px;
+    top: -10px;
+    z-index: 30;
+    animation: confettiFall 1.3s linear forwards;
 }
 
 @keyframes confettiFall {
-
     to {
-        transform:
-            translateY(105vh)
-            rotate(720deg);
-
+        transform: translateY(105vh) rotate(720deg);
         opacity: 0;
     }
 }
 
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer {
-    text-align: center;
-
-    padding:
-        25px
-        15px
-        40px;
-
-    color: #8a919b;
-
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 800px) {
-
-    .games {
-        grid-template-columns: 1fr;
-    }
-
-    .stats {
-        grid-template-columns:
-            1fr;
-    }
-
+@media (max-width: 850px) {
+    .games,
     .achievements {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr 1fr;
     }
-
-    .hero {
-        padding: 24px;
-    }
-
 }
 
-@media (max-width: 500px) {
-
-    .main {
-        padding:
-            18px
-            10px
-            40px;
-    }
-
-    .header-inner {
-        padding:
-            11px
-            12px;
-    }
-
-    .logo {
-        font-size: 16px;
-    }
-
-    .hero h1 {
+@media (max-width: 600px) {
+    header h1 {
         font-size: 25px;
     }
 
-    .toast-container {
-        right: 10px;
-        left: 10px;
-        bottom: 10px;
+    .games,
+    .achievements,
+    .stats {
+        grid-template-columns: 1fr;
     }
 
-    .toast {
-        width: 100%;
+    .chance-row {
+        grid-template-columns: 110px 1fr 55px;
+        font-size: 13px;
     }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
-
-<header class="header">
-
-    <div class="header-inner">
-
-        <div class="logo">
-
-            <div class="logo-icon">
-                B
-            </div>
-
-            <div>
-                Binnou Chance
-                <span class="logo-small">
-                    Game
-                </span>
-            </div>
-
-        </div>
-
-        <button
-            class="sound-button"
-            id="soundButton"
-            onclick="toggleSound()"
-        >
-            🔊 Sound On
-        </button>
-
-    </div>
-
+<header>
+    <h1>🎲 Gamble for a Chance to Win a Binnou Image</h1>
+    <p>Try your luck. Win games. Unlock achievements. Find Binnou.</p>
 </header>
 
+<div class="container">
 
-<!-- =======================================================
-     MAIN
-======================================================= -->
+    <section class="section">
+        <div class="section-title">🎮 Games</div>
 
-<main class="main">
+        <div class="games">
 
+            <div class="card">
+                <div class="game-icon">🪙</div>
+                <h3>Coin Flip</h3>
+                <p>50% chance of heads, 50% chance of tails.</p>
 
-    <!-- HERO -->
+                <div id="coin" class="coin">?</div>
 
-    <section class="hero">
+                <button class="play-btn" onclick="coinFlip()">
+                    Flip Coin
+                </button>
 
-        <div class="hero-content">
+                <div id="coinResult" class="result"></div>
+            </div>
 
-            <h1>
-                Gamble for a Chance to Win a Binnou Image
-            </h1>
+            <div class="card">
+                <div class="game-icon">🎲</div>
+                <h3>Dice Roll</h3>
+                <p>Roll a six-sided die.</p>
 
-            <p>
-                Pick a game, test your luck and try to unlock
-                the legendary Binnou image.
-            </p>
+                <div id="dice" class="dice">🎲</div>
 
-            <div class="warning">
-                Fictional game — no real money or prizes.
+                <button class="play-btn" onclick="diceRoll()">
+                    Roll Dice
+                </button>
+
+                <div id="diceResult" class="result"></div>
+            </div>
+
+            <div class="card">
+                <div class="game-icon">🔢</div>
+                <h3>Lucky Number</h3>
+                <p>Guess the secret number from 1 to 10.</p>
+
+                <div id="luckyNumber" class="lucky-number">?</div>
+
+                <button class="play-btn" onclick="luckyNumber()">
+                    Try Your Luck
+                </button>
+
+                <div id="numberResult" class="result"></div>
             </div>
 
         </div>
-
     </section>
 
+    <section class="section">
+        <div class="section-title">📊 Chance Chart</div>
 
-    <!-- STATS -->
+        <div class="card chart">
 
-    <section class="stats">
-
-        <div class="stat">
-
-            <div class="stat-label">
-                Games Played
+            <div class="chance-row">
+                <div class="chance-name">🪙 Coin Win</div>
+                <div class="bar">
+                    <div class="bar-fill" style="width:50%"></div>
+                </div>
+                <div class="chance-value">50%</div>
             </div>
 
-            <div
-                class="stat-value"
-                id="gamesPlayed"
-            >
-                0
+            <div class="chance-row">
+                <div class="chance-name">🎲 Specific Dice</div>
+                <div class="bar">
+                    <div class="bar-fill" style="width:16.67%"></div>
+                </div>
+                <div class="chance-value">1/6</div>
             </div>
 
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-label">
-                Wins
+            <div class="chance-row">
+                <div class="chance-name">🔢 Lucky Number</div>
+                <div class="bar">
+                    <div class="bar-fill" style="width:10%"></div>
+                </div>
+                <div class="chance-value">10%</div>
             </div>
 
-            <div
-                class="stat-value"
-                id="wins"
-            >
-                0
+            <div class="chance-row">
+                <div class="chance-name">🏆 RNG Achievement</div>
+                <div class="bar">
+                    <div class="bar-fill" style="width:10%"></div>
+                </div>
+                <div class="chance-value">1/10</div>
             </div>
 
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-label">
-                Achievements
-            </div>
-
-            <div
-                class="stat-value"
-                id="achievementCount"
-            >
-                0/0
+            <div class="chance-row">
+                <div class="chance-name">🖼️ Binnou</div>
+                <div class="bar">
+                    <div class="bar-fill" style="width:5%"></div>
+                </div>
+                <div class="chance-value">1/20</div>
             </div>
 
         </div>
-
     </section>
 
+    <section class="section">
+        <div class="section-title">📈 Your Stats</div>
 
-    <!-- GAMES -->
-
-    <div class="section-title">
-
-        <h2>
-            Games
-        </h2>
-
-        <span>
-            Choose your game
-        </span>
-
-    </div>
-
-
-    <section class="games">
-
-
-        <!-- COIN -->
-
-        <div
-            class="game-card"
-            style="
-                --game-color:#d49a1c;
-                --game-bg:#fff5d9;
-            "
-            onclick="openCoinFlip()"
-        >
-
-            <div class="game-icon">
-                🪙
+        <div class="stats">
+            <div class="stat">
+                <div id="gamesPlayed" class="stat-number">0</div>
+                <div class="stat-label">Games Played</div>
             </div>
 
-            <h3>
-                Coin Flip
-            </h3>
+            <div class="stat">
+                <div id="wins" class="stat-number">0</div>
+                <div class="stat-label">Wins</div>
+            </div>
 
-            <p>
-                Pick heads or tails and see which side the coin lands on.
-            </p>
+            <div class="stat">
+                <div id="achievementCount" class="stat-number">0</div>
+                <div class="stat-label">Achievements</div>
+            </div>
+        </div>
+    </section>
 
-            <button class="game-button">
-                Play Coin Flip
+    <section class="section">
+        <div class="section-title">🏆 Achievements</div>
+
+        <div id="achievements" class="achievements"></div>
+    </section>
+
+    <section class="section">
+        <div class="section-title">🖼️ Binnou Reward</div>
+
+        <div class="card reward">
+
+            <div id="binnouLocked">
+                <h2>🔒 Binnou is still locked</h2>
+                <p>
+                    Win games for a chance to unlock the secret image.
+                </p>
+                <p>
+                    Current unlock chance: <strong>1/20 per win</strong>
+                </p>
+            </div>
+
+            <div id="binnouUnlocked" class="hidden">
+                <h2 class="win">🎉 YOU FOUND BINNOU!</h2>
+
+                <img
+                    src="binnou.png"
+                    alt="Binnou"
+                    class="binnou-image"
+                >
+
+                <p>You officially got the secret reward.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-title">📜 Recent Activity</div>
+
+        <div id="activity" class="activity"></div>
+    </section>
+
+    <section class="section">
+        <div class="controls">
+            <button class="toggle" onclick="toggleSound()" id="soundButton">
+                🔊 Sound: ON
             </button>
 
-        </div>
-
-
-        <!-- DICE -->
-
-        <div
-            class="game-card"
-            style="
-                --game-color:#4d7bd8;
-                --game-bg:#eaf0ff;
-            "
-            onclick="openDice()"
-        >
-
-            <div class="game-icon">
-                🎲
-            </div>
-
-            <h3>
-                Dice Roll
-            </h3>
-
-            <p>
-                Pick a number from 1 to 6 and roll the dice.
-            </p>
-
-            <button class="game-button">
-                Play Dice
+            <button class="reset" onclick="resetProgress()">
+                Reset Progress
             </button>
-
         </div>
-
-
-        <!-- NUMBER -->
-
-        <div
-            class="game-card"
-            style="
-                --game-color:#7c55c9;
-                --game-bg:#f0e9ff;
-            "
-            onclick="openLuckyNumber()"
-        >
-
-            <div class="game-icon">
-                🔢
-            </div>
-
-            <h3>
-                Lucky Number
-            </h3>
-
-            <p>
-                Choose one number from 1 to 10 and hope it's the one.
-            </p>
-
-            <button class="game-button">
-                Play Lucky Number
-            </button>
-
-        </div>
-
-
     </section>
 
+</div>
 
-    <!-- GAME -->
-
-    <section class="panel">
-
-        <div class="panel-header">
-
-            <h2 id="gameTitle">
-                Select a game
-            </h2>
-
-            <span
-                class="game-status"
-                id="gameStatus"
-            >
-                Waiting
-            </span>
-
-        </div>
-
-        <div
-            class="game-area"
-            id="gameArea"
-        >
-
-            <p class="instruction">
-                Choose one of the games above to start.
-            </p>
-
-        </div>
-
-        <div
-            class="result"
-            id="result"
-        >
-            Ready when you are.
-        </div>
-
-    </section>
-
-
-    <!-- BINNOU -->
-
-    <div class="section-title">
-
-        <h2>
-            Binnou Collection
-        </h2>
-
-        <span>
-            1 secret image
-        </span>
-
-    </div>
-
-
-    <section class="panel">
-
-        <div
-            class="reward-box"
-            id="binnouReward"
-        ></div>
-
-    </section>
-
-
-    <!-- ACHIEVEMENTS -->
-
-    <div class="section-title">
-
-        <h2>
-            Achievements
-        </h2>
-
-        <span>
-            Complete them all
-        </span>
-
-    </div>
-
-
-    <section class="panel">
-
-        <div
-            class="achievements"
-            id="achievements"
-        ></div>
-
-    </section>
-
-
-    <!-- HISTORY -->
-
-    <div class="section-title">
-
-        <h2>
-            Recent Activity
-        </h2>
-
-        <span>
-            Last 50 events
-        </span>
-
-    </div>
-
-
-    <section class="panel">
-
-        <div
-            class="history"
-            id="history"
-        ></div>
-
-    </section>
-
-
-    <!-- RESET -->
-
-    <section
-        class="panel"
-        style="text-align:center;"
-    >
-
-        <button
-            class="choice"
-            onclick="resetGame()"
-        >
-            Reset Progress
-        </button>
-
-    </section>
-
-
-</main>
-
-
-<footer class="footer">
-
-    Binnou Chance Game<br>
-    Everything is saved locally in your browser.
-
-</footer>
-
-
-<!-- TOASTS -->
-
-<div
-    class="toast-container"
-    id="toastContainer"
-></div>
-
-
-<!-- ACHIEVEMENT AUDIO -->
+<div id="toast" class="toast"></div>
 
 <audio
     id="achievementSound"
     src="achievement.mp3"
-    preload="auto"
-></audio>
-
+    preload="auto">
+</audio>
 
 <script>
 
-/* =========================================================
-   STORAGE
-========================================================= */
-
-const STORAGE_KEY =
-    "binnouChanceGameV3";
-
-
-let gameData =
-    JSON.parse(
-        localStorage.getItem(
-            STORAGE_KEY
-        )
-    );
-
-
-/* =========================================================
-   DEFAULT DATA
-========================================================= */
-
-if (!gameData) {
-
-    gameData = {
-
-        totalGames: 0,
-
-        wins: 0,
-
-        losses: 0,
-
-        binnouWon: false,
-
-        history: [],
-
-        achievements: [
-
-            {
-                id: 1,
-
-                name: "First Steps",
-
-                description:
-                    "Win your first game.",
-
-                requirement: 1,
-
-                type: "wins",
-
-                rarity: "Common",
-
-                completed: false
-            },
-
-            {
-                id: 2,
-
-                name: "Getting Lucky",
-
-                description:
-                    "Win 5 games.",
-
-                requirement: 5,
-
-                type: "wins",
-
-                rarity: "Common",
-
-                completed: false
-            },
-
-            {
-                id: 3,
-
-                name: "Fortune Favors You",
-
-                description:
-                    "Win 10 games.",
-
-                requirement: 10,
-
-                type: "wins",
-
-                rarity: "Uncommon",
-
-                completed: false
-            },
-
-            {
-                id: 4,
-
-                name: "Lucky Streak",
-
-                description:
-                    "Win 20 games.",
-
-                requirement: 20,
-
-                type: "wins",
-
-                rarity: "Rare",
-
-                completed: false
-            },
-
-            {
-                id: 5,
-
-                name: "Unreasonably Lucky",
-
-                description:
-                    "Win 50 games.",
-
-                requirement: 50,
-
-                type: "wins",
-
-                rarity: "Epic",
-
-                completed: false
-            },
-
-            {
-                id: 6,
-
-                name: "Binnou Hunter",
-
-                description:
-                    "Find the secret Binnou image.",
-
-                requirement: 1,
-
-                type: "binnou",
-
-                rarity: "Legendary",
-
-                completed: false
-            }
-
-        ]
-
-    };
-
-    saveGame();
-
-}
-
-
-/* =========================================================
-   SAVE
-========================================================= */
-
-function saveGame() {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(gameData)
-    );
-
-}
-
-
-/* =========================================================
-   AUDIO
-========================================================= */
-
-let soundEnabled = true;
-
-let audioContext = null;
-
+const defaultData = {
+    games: 0,
+    wins: 0,
+    achievements: [],
+    binnou: false,
+    activity: []
+};
+
+let data = JSON.parse(
+    localStorage.getItem("binnouGameData")
+) || defaultData;
+
+let soundEnabled =
+    localStorage.getItem("binnouSound") !== "false";
+
+const achievementList = [
+
+    {
+        id: "first",
+        icon: "🌱",
+        name: "First Steps",
+        description: "Win your first game.",
+        rarity: "Common",
+        type: "wins",
+        requirement: 1
+    },
+
+    {
+        id: "five",
+        icon: "🍀",
+        name: "Getting Lucky",
+        description: "Win 5 games.",
+        rarity: "Common",
+        type: "wins",
+        requirement: 5
+    },
+
+    {
+        id: "ten",
+        icon: "💰",
+        name: "Fortune Favors You",
+        description: "Win 10 games.",
+        rarity: "Uncommon",
+        type: "wins",
+        requirement: 10
+    },
+
+    {
+        id: "twenty",
+        icon: "🔥",
+        name: "Lucky Streak",
+        description: "Win 20 games.",
+        rarity: "Rare",
+        type: "wins",
+        requirement: 20
+    },
+
+    {
+        id: "fifty",
+        icon: "👑",
+        name: "Unreasonably Lucky",
+        description: "Win 50 games.",
+        rarity: "Epic",
+        type: "wins",
+        requirement: 50
+    },
+
+    {
+        id: "coin",
+        icon: "🪙",
+        name: "Heads or Tails",
+        description: "Win a coin flip. 1/10 RNG chance.",
+        rarity: "Uncommon",
+        type: "rngCoin"
+    },
+
+    {
+        id: "dice",
+        icon: "🎲",
+        name: "Dice Goblin",
+        description: "Roll a 6. 1/10 RNG achievement chance.",
+        rarity: "Rare",
+        type: "rngDice"
+    },
+
+    {
+        id: "lucky",
+        icon: "🔢",
+        name: "Number Wizard",
+        description: "Guess the lucky number. 1/10 RNG chance.",
+        rarity: "Rare",
+        type: "rngLucky"
+    },
+
+    {
+        id: "perfect",
+        icon: "✨",
+        name: "Pure Luck",
+        description: "Trigger an RNG achievement.",
+        rarity: "Epic",
+        type: "rngAny"
+    },
+
+    {
+        id: "binnou",
+        icon: "🖼️",
+        name: "Binnou Hunter",
+        description: "Unlock the secret Binnou image.",
+        rarity: "Legendary",
+        type: "binnou"
+    },
+
+    {
+        id: "hundred",
+        icon: "💯",
+        name: "Gambler",
+        description: "Play 100 games.",
+        rarity: "Epic",
+        type: "games",
+        requirement: 100
+    },
+
+    {
+        id: "fivehundred",
+        icon: "💀",
+        name: "You Again?",
+        description: "Play 500 games.",
+        rarity: "Legendary",
+        type: "games",
+        requirement: 500
+    }
+];
+
+
+// -------------------------
+// SOUND SYSTEM
+// -------------------------
+
+let audioContext;
 
 function getAudioContext() {
 
     if (!audioContext) {
-
         audioContext =
-            new (
-                window.AudioContext ||
-                window.webkitAudioContext
-            )();
-
+            new (window.AudioContext ||
+            window.webkitAudioContext)();
     }
 
     return audioContext;
-
 }
-
 
 function tone(
     frequency,
     duration,
     type = "sine",
-    volume = 0.06
+    volume = .08
 ) {
 
-    if (!soundEnabled)
-        return;
+    if (!soundEnabled) return;
 
-    const ctx =
-        getAudioContext();
+    const ctx = getAudioContext();
 
     const oscillator =
         ctx.createOscillator();
@@ -2042,11 +799,8 @@ function tone(
     const gain =
         ctx.createGain();
 
-    oscillator.type =
-        type;
-
-    oscillator.frequency.value =
-        frequency;
+    oscillator.type = type;
+    oscillator.frequency.value = frequency;
 
     gain.gain.setValueAtTime(
         volume,
@@ -2054,865 +808,576 @@ function tone(
     );
 
     gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        ctx.currentTime +
-        duration
+        .001,
+        ctx.currentTime + duration
     );
 
     oscillator.connect(gain);
-
-    gain.connect(
-        ctx.destination
-    );
+    gain.connect(ctx.destination);
 
     oscillator.start();
 
     oscillator.stop(
-        ctx.currentTime +
-        duration
+        ctx.currentTime + duration
     );
-
 }
 
 
-/* CLICK */
+// -------------------------
+// COIN DING
+// -------------------------
 
-function sfxClick() {
+function coinDing() {
 
-    tone(
-        520,
-        .045,
-        "square",
-        .025
-    );
+    if (!soundEnabled) return;
 
+    tone(880, .12, "sine", .09);
+
+    setTimeout(() => {
+        tone(1320, .16, "sine", .07);
+    }, 90);
 }
 
 
-/* COIN */
+// -------------------------
+// BUTTON SOUND
+// -------------------------
 
-function sfxCoin() {
-
-    tone(
-        700,
-        .07,
-        "triangle",
-        .035
-    );
-
+function clickSound() {
+    tone(420, .05, "square", .035);
 }
 
 
-/* DICE */
+// -------------------------
+// WIN SOUND
+// -------------------------
 
-function sfxDice() {
+function winSound() {
 
-    tone(
-        300 +
-        Math.random() * 250,
-        .055,
-        "square",
-        .025
-    );
+    if (!soundEnabled) return;
 
+    tone(660, .1);
+
+    setTimeout(() => {
+        tone(880, .1);
+    }, 90);
+
+    setTimeout(() => {
+        tone(1100, .16);
+    }, 180);
 }
 
 
-/* NUMBER */
+// -------------------------
+// LOSS SOUND
+// -------------------------
 
-function sfxNumber() {
+function lossSound() {
 
-    tone(
-        430 +
-        Math.random() * 200,
-        .04,
-        "square",
-        .02
-    );
+    if (!soundEnabled) return;
 
+    tone(220, .15, "sawtooth", .035);
+
+    setTimeout(() => {
+        tone(160, .2, "sawtooth", .025);
+    }, 100);
 }
 
 
-/* WIN */
+// -------------------------
+// HELPERS
+// -------------------------
 
-function sfxWin() {
+function save() {
 
-    if (!soundEnabled)
+    localStorage.setItem(
+        "binnouGameData",
+        JSON.stringify(data)
+    );
+}
+
+function addActivity(text) {
+
+    data.activity.unshift(text);
+
+    data.activity =
+        data.activity.slice(0, 10);
+
+    renderActivity();
+    save();
+}
+
+function showToast(text) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = text;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+}
+
+function randomChance(denominator) {
+
+    return Math.floor(
+        Math.random() * denominator
+    ) === 0;
+}
+
+function confetti() {
+
+    for (let i = 0; i < 35; i++) {
+
+        const piece =
+            document.createElement("div");
+
+        piece.className = "confetti";
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+        piece.style.animationDelay =
+            Math.random() * .3 + "s";
+
+        document.body.appendChild(piece);
+
+        setTimeout(() => {
+            piece.remove();
+        }, 1600);
+    }
+}
+
+
+// -------------------------
+// GAME COMPLETION
+// -------------------------
+
+function completeGame() {
+
+    data.games++;
+
+    checkNormalAchievements();
+
+    renderStats();
+    save();
+}
+
+
+// -------------------------
+// WIN
+// -------------------------
+
+function winGame(gameName) {
+
+    data.wins++;
+
+    winSound();
+
+    addActivity(
+        `🎉 Won ${gameName}!`
+    );
+
+    // 1/20 chance to get Binnou
+    if (
+        !data.binnou &&
+        randomChance(20)
+    ) {
+
+        unlockBinnou();
+    }
+
+    checkNormalAchievements();
+
+    renderStats();
+    save();
+}
+
+
+// -------------------------
+// LOSS
+// -------------------------
+
+function loseGame(gameName) {
+
+    lossSound();
+
+    addActivity(
+        `❌ Lost ${gameName}.`
+    );
+
+    renderStats();
+    save();
+}
+
+
+// -------------------------
+// COIN FLIP
+// -------------------------
+
+function coinFlip() {
+
+    clickSound();
+
+    const coin =
+        document.getElementById("coin");
+
+    const result =
+        document.getElementById("coinResult");
+
+    coin.classList.remove("flip");
+
+    void coin.offsetWidth;
+
+    coin.classList.add("flip");
+
+    const heads =
+        Math.random() < .5;
+
+    setTimeout(() => {
+
+        coin.textContent =
+            heads ? "H" : "T";
+
+        result.className =
+            "result " +
+            (heads ? "win" : "loss");
+
+        result.textContent =
+            heads
+                ? "Heads! You won!"
+                : "Tails! You lost!";
+
+        // Proper coin landing ding
+        coinDing();
+
+        completeGame();
+
+        if (heads) {
+
+            winGame("Coin Flip");
+
+            // 1/10 RNG achievement
+            if (randomChance(10)) {
+
+                unlockAchievement(
+                    "coin"
+                );
+            }
+
+        } else {
+
+            loseGame("Coin Flip");
+        }
+
+    }, 800);
+}
+
+
+// -------------------------
+// DICE
+// -------------------------
+
+function diceRoll() {
+
+    clickSound();
+
+    const dice =
+        document.getElementById("dice");
+
+    const result =
+        document.getElementById("diceResult");
+
+    dice.classList.remove("roll");
+
+    void dice.offsetWidth;
+
+    dice.classList.add("roll");
+
+    const number =
+        Math.floor(Math.random() * 6) + 1;
+
+    const faces = [
+        "⚀",
+        "⚁",
+        "⚂",
+        "⚃",
+        "⚄",
+        "⚅"
+    ];
+
+    setTimeout(() => {
+
+        dice.textContent =
+            faces[number - 1];
+
+        result.className =
+            "result";
+
+        result.textContent =
+            `You rolled ${number}.`;
+
+        completeGame();
+
+        // Rolling 6 = win
+        if (number === 6) {
+
+            result.className =
+                "result win";
+
+            result.textContent =
+                "🎉 You rolled a 6!";
+
+            winGame("Dice Roll");
+
+            // 1/10 RNG achievement
+            if (randomChance(10)) {
+
+                unlockAchievement(
+                    "dice"
+                );
+            }
+
+        } else {
+
+            result.className =
+                "result loss";
+
+            result.textContent =
+                `You rolled ${number}. Try again!`;
+
+            loseGame("Dice Roll");
+        }
+
+    }, 650);
+}
+
+
+// -------------------------
+// LUCKY NUMBER
+// -------------------------
+
+function luckyNumber() {
+
+    clickSound();
+
+    const display =
+        document.getElementById("luckyNumber");
+
+    const result =
+        document.getElementById("numberResult");
+
+    display.classList.remove("spin");
+
+    void display.offsetWidth;
+
+    display.classList.add("spin");
+
+    const chosen =
+        Math.floor(Math.random() * 10) + 1;
+
+    setTimeout(() => {
+
+        display.textContent =
+            chosen;
+
+        if (chosen === 7) {
+
+            result.className =
+                "result win";
+
+            result.textContent =
+                "🎉 7! You found the lucky number!";
+
+            completeGame();
+
+            winGame("Lucky Number");
+
+            // 1/10 RNG achievement
+            if (randomChance(10)) {
+
+                unlockAchievement(
+                    "lucky"
+                );
+            }
+
+        } else {
+
+            result.className =
+                "result loss";
+
+            result.textContent =
+                `You got ${chosen}. The lucky number was 7.`;
+
+            completeGame();
+
+            loseGame("Lucky Number");
+        }
+
+    }, 600);
+}
+
+
+// -------------------------
+// ACHIEVEMENTS
+// -------------------------
+
+function unlockAchievement(id) {
+
+    if (
+        data.achievements.includes(id)
+    ) {
         return;
+    }
 
-    tone(523, .09);
+    data.achievements.push(id);
 
-    setTimeout(
-        () => tone(659, .09),
-        90
-    );
+    const achievement =
+        achievementList.find(
+            a => a.id === id
+        );
 
-    setTimeout(
-        () => tone(784, .14),
-        180
-    );
+    if (!achievement) return;
 
-}
-
-
-/* LOSS */
-
-function sfxLoss() {
-
-    if (!soundEnabled)
-        return;
-
-    tone(
-        240,
-        .13,
-        "sawtooth",
-        .025
-    );
-
-    setTimeout(
-        () => {
-
-            tone(
-                180,
-                .18,
-                "sawtooth",
-                .02
-            );
-
-        },
-        110
-    );
-
-}
-
-
-/* SECRET UNLOCK */
-
-function sfxSecret() {
-
-    if (!soundEnabled)
-        return;
-
-    tone(
-        523,
-        .12,
-        "triangle",
-        .05
-    );
-
-    setTimeout(
-        () => tone(
-            659,
-            .12,
-            "triangle",
-            .05
-        ),
-        120
-    );
-
-    setTimeout(
-        () => tone(
-            784,
-            .14,
-            "triangle",
-            .05
-        ),
-        240
-    );
-
-    setTimeout(
-        () => tone(
-            1047,
-            .25,
-            "triangle",
-            .05
-        ),
-        360
-    );
-
-}
-
-
-/* =========================================================
-   ACHIEVEMENT AUDIO
-========================================================= */
-
-function playAchievementSound() {
-
-    if (!soundEnabled)
-        return;
-
-    const audio =
+    const sound =
         document.getElementById(
             "achievementSound"
         );
 
-    audio.currentTime = 0;
+    if (soundEnabled) {
 
-    audio.play().catch(
-        () => {}
-    );
+        sound.currentTime = 0;
 
-}
-
-
-/* =========================================================
-   SOUND BUTTON
-========================================================= */
-
-function toggleSound() {
-
-    soundEnabled =
-        !soundEnabled;
-
-    document.getElementById(
-        "soundButton"
-    ).textContent =
-        soundEnabled
-            ? "🔊 Sound On"
-            : "🔇 Sound Off";
-
-}
-
-
-/* =========================================================
-   RESULT
-========================================================= */
-
-function setResult(
-    text,
-    type = ""
-) {
-
-    const result =
-        document.getElementById(
-            "result"
-        );
-
-    result.className =
-        "result";
-
-    if (type) {
-
-        void result.offsetWidth;
-
-        result.classList.add(
-            type
-        );
-
+        sound.play().catch(() => {});
     }
 
-    result.textContent =
-        text;
+    showToast(
+        `🏆 Achievement Unlocked: ${achievement.name}`
+    );
 
+    confetti();
+
+    addActivity(
+        `🏆 Achievement unlocked: ${achievement.name}`
+    );
+
+    renderAchievements();
+    renderStats();
+
+    save();
 }
 
 
-/* =========================================================
-   STATUS
-========================================================= */
+function checkNormalAchievements() {
 
-function setStatus(text) {
-
-    document.getElementById(
-        "gameStatus"
-    ).textContent =
-        text;
-
-}
-
-
-/* =========================================================
-   COIN FLIP
-========================================================= */
-
-function openCoinFlip() {
-
-    sfxClick();
-
-    document.getElementById(
-        "gameTitle"
-    ).textContent =
-        "Coin Flip";
-
-    setStatus(
-        "Heads or Tails"
-    );
-
-    document.getElementById(
-        "gameArea"
-    ).innerHTML = `
-
-        <div
-            class="coin"
-            id="coin"
-        >
-            ?
-        </div>
-
-        <p class="instruction">
-            Pick a side.
-        </p>
-
-        <div class="choice-row">
-
-            <button
-                class="choice"
-                onclick="coinFlip('Heads')"
-            >
-                Heads
-            </button>
-
-            <button
-                class="choice"
-                onclick="coinFlip('Tails')"
-            >
-                Tails
-            </button>
-
-        </div>
-    `;
-
-    setResult(
-        "Ready."
-    );
-
-}
-
-
-function coinFlip(choice) {
-
-    const coin =
-        document.getElementById(
-            "coin"
+    // Win achievements
+    const winAchievements =
+        achievementList.filter(
+            a => a.type === "wins"
         );
 
-    if (!coin)
-        return;
-
-    sfxClick();
-
-    coin.classList.remove(
-        "flip"
-    );
-
-    void coin.offsetWidth;
-
-    coin.classList.add(
-        "flip"
-    );
-
-    const result =
-        Math.random() < .5
-            ? "Heads"
-            : "Tails";
-
-    let interval =
-        setInterval(
-            sfxCoin,
-            170
-        );
-
-    setTimeout(
-        () => {
-
-            clearInterval(
-                interval
-            );
-
-            coin.textContent =
-                result === "Heads"
-                    ? "H"
-                    : "T";
-
-            finishGame(
-                choice === result,
-
-                "Coin Flip",
-
-                `You chose ${choice}. It landed on ${result}.`
-            );
-
-        },
-        850
-    );
-
-}
-
-
-/* =========================================================
-   DICE
-========================================================= */
-
-function openDice() {
-
-    sfxClick();
-
-    document.getElementById(
-        "gameTitle"
-    ).textContent =
-        "Dice Roll";
-
-    setStatus(
-        "Choose 1 - 6"
-    );
-
-    document.getElementById(
-        "gameArea"
-    ).innerHTML = `
-
-        <div
-            class="dice"
-            id="dice"
-        >
-            ?
-        </div>
-
-        <p class="instruction">
-            Pick a number.
-        </p>
-
-        <div class="choice-row">
-
-            ${[1,2,3,4,5,6]
-                .map(
-                    number => `
-                        <button
-                            class="choice"
-                            onclick="diceRoll(${number})"
-                        >
-                            ${number}
-                        </button>
-                    `
-                )
-                .join("")}
-
-        </div>
-    `;
-
-    setResult(
-        "Ready."
-    );
-
-}
-
-
-function diceRoll(choice) {
-
-    const dice =
-        document.getElementById(
-            "dice"
-        );
-
-    if (!dice)
-        return;
-
-    sfxClick();
-
-    dice.classList.remove(
-        "roll"
-    );
-
-    void dice.offsetWidth;
-
-    dice.classList.add(
-        "roll"
-    );
-
-    let interval =
-        setInterval(
-            sfxDice,
-            120
-        );
-
-    const result =
-        Math.floor(
-            Math.random() * 6
-        ) + 1;
-
-    setTimeout(
-        () => {
-
-            clearInterval(
-                interval
-            );
-
-            dice.textContent =
-                result;
-
-            finishGame(
-                choice === result,
-
-                "Dice Roll",
-
-                `You chose ${choice}. The dice rolled ${result}.`
-            );
-
-        },
-        750
-    );
-
-}
-
-
-/* =========================================================
-   LUCKY NUMBER
-========================================================= */
-
-function openLuckyNumber() {
-
-    sfxClick();
-
-    document.getElementById(
-        "gameTitle"
-    ).textContent =
-        "Lucky Number";
-
-    setStatus(
-        "Choose 1 - 10"
-    );
-
-    document.getElementById(
-        "gameArea"
-    ).innerHTML = `
-
-        <div
-            class="number-display"
-            id="numberDisplay"
-        >
-            ?
-        </div>
-
-        <p class="instruction">
-            Pick one number.
-        </p>
-
-        <div class="choice-row">
-
-            ${Array.from(
-                {length:10},
-                (_,i) => `
-
-                    <button
-                        class="choice"
-                        onclick="luckyNumber(${i+1})"
-                    >
-                        ${i+1}
-                    </button>
-
-                `
-            ).join("")}
-
-        </div>
-    `;
-
-    setResult(
-        "Ready."
-    );
-
-}
-
-
-function luckyNumber(choice) {
-
-    const display =
-        document.getElementById(
-            "numberDisplay"
-        );
-
-    if (!display)
-        return;
-
-    sfxClick();
-
-    display.classList.remove(
-        "spin"
-    );
-
-    void display.offsetWidth;
-
-    display.classList.add(
-        "spin"
-    );
-
-    let counter = 0;
-
-    const interval =
-        setInterval(
-            () => {
-
-                display.textContent =
-                    Math.floor(
-                        Math.random() * 10
-                    ) + 1;
-
-                sfxNumber();
-
-                counter++;
-
-                if (counter >= 9) {
-
-                    clearInterval(
-                        interval
-                    );
-
-                    const result =
-                        Math.floor(
-                            Math.random() * 10
-                        ) + 1;
-
-                    display.textContent =
-                        result;
-
-                    finishGame(
-                        choice === result,
-
-                        "Lucky Number",
-
-                        `You chose ${choice}. The lucky number was ${result}.`
-                    );
-
-                }
-
-            },
-            85
-        );
-
-}
-
-
-/* =========================================================
-   FINISH GAME
-========================================================= */
-
-function finishGame(
-    won,
-    gameName,
-    message
-) {
-
-    gameData.totalGames++;
-
-    if (won) {
-
-        gameData.wins++;
-
-        sfxWin();
-
-        setResult(
-            message +
-            " You won!",
-            "win"
-        );
-
-        addHistory(
-            `✓ ${gameName}: ${message}`,
-            "win"
-        );
-
-        createConfetti();
-
-        /*
-            5% chance of Binnou
-            after a normal win.
-        */
+    winAchievements.forEach(a => {
 
         if (
-            !gameData.binnouWon &&
-            Math.random() < .05
+            data.wins >= a.requirement
         ) {
 
-            setTimeout(
-                unlockBinnou,
-                350
-            );
-
+            unlockAchievement(a.id);
         }
+    });
 
-    } else {
-
-        gameData.losses++;
-
-        sfxLoss();
-
-        setResult(
-            message +
-            " Better luck next time.",
-            "loss"
+    // Game count achievements
+    const gameAchievements =
+        achievementList.filter(
+            a => a.type === "games"
         );
 
-        addHistory(
-            `✗ ${gameName}: ${message}`,
-            "loss"
-        );
+    gameAchievements.forEach(a => {
 
+        if (
+            data.games >= a.requirement
+        ) {
+
+            unlockAchievement(a.id);
+        }
+    });
+
+    // Binnou achievement
+    if (data.binnou) {
+
+        unlockAchievement(
+            "binnou"
+        );
     }
-
-    checkAchievements();
-
-    updateUI();
-
 }
 
 
-/* =========================================================
-   BINNOU UNLOCK
-========================================================= */
+// -------------------------
+// BINNOU
+// -------------------------
 
 function unlockBinnou() {
 
-    if (gameData.binnouWon)
-        return;
+    if (data.binnou) return;
 
-    gameData.binnouWon =
-        true;
+    data.binnou = true;
 
-    addHistory(
-        "★ BINNOU IMAGE UNLOCKED!",
-        "special"
+    winSound();
+
+    document
+        .getElementById("binnouLocked")
+        .classList.add("hidden");
+
+    document
+        .getElementById("binnouUnlocked")
+        .classList.remove("hidden");
+
+    showToast(
+        "🖼️ THE BINNOU IMAGE HAS BEEN UNLOCKED!"
     );
 
-    sfxSecret();
+    confetti();
 
-    createConfetti();
-
-    setTimeout(
-        () => {
-
-            showToast(
-                "Binnou Found!",
-                "You unlocked the secret Binnou image.",
-                true
-            );
-
-        },
-        200
+    addActivity(
+        "🖼️ Binnou has been unlocked!"
     );
 
-    updateUI();
-
-}
-
-
-/* =========================================================
-   REWARD UI
-========================================================= */
-
-function updateReward() {
-
-    const container =
-        document.getElementById(
-            "binnouReward"
-        );
-
-    if (
-        !gameData.binnouWon
-    ) {
-
-        container.innerHTML = `
-
-            <div class="reward-lock">
-                🔒
-            </div>
-
-            <div class="reward-title">
-                Binnou is locked
-            </div>
-
-            <div class="reward-text">
-                Win a game for a chance to unlock it.
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-    container.innerHTML = `
-
-        <img
-            class="binnou-image"
-            src="binnou.png"
-            alt="Binnou"
-            onerror="
-                this.style.display='none';
-                document.getElementById('missingBinnou').style.display='block';
-            "
-        >
-
-        <div
-            id="missingBinnou"
-            style="
-                display:none;
-                margin-top:15px;
-                color:#777;
-            "
-        >
-            <b>binnou.png</b> is missing.<br>
-            Put it beside index.html.
-        </div>
-
-        <div
-            class="reward-title"
-            style="margin-top:14px;"
-        >
-            Binnou Unlocked
-        </div>
-
-        <div class="reward-text">
-            You found the secret image.
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
-
-function getProgress(
-    achievement
-) {
-
-    if (
-        achievement.type === "wins"
-    ) {
-
-        return gameData.wins;
-
-    }
-
-    if (
-        achievement.type === "binnou"
-    ) {
-
-        return gameData.binnouWon
-            ? 1
-            : 0;
-
-    }
-
-    return 0;
-
-}
-
-
-function rarityClass(
-    rarity
-) {
-
-    return (
-        "rarity-" +
-        rarity.toLowerCase()
+    unlockAchievement(
+        "binnou"
     );
 
+    save();
 }
 
 
-function updateAchievements() {
+// -------------------------
+// RENDER STATS
+// -------------------------
+
+function renderStats() {
+
+    document.getElementById(
+        "gamesPlayed"
+    ).textContent = data.games;
+
+    document.getElementById(
+        "wins"
+    ).textContent = data.wins;
+
+    document.getElementById(
+        "achievementCount"
+    ).textContent =
+        data.achievements.length;
+}
+
+
+// -------------------------
+// RENDER ACHIEVEMENTS
+// -------------------------
+
+function renderAchievements() {
 
     const container =
         document.getElementById(
@@ -2921,478 +1386,188 @@ function updateAchievements() {
 
     container.innerHTML = "";
 
-    let completedCount = 0;
+    achievementList.forEach(a => {
 
-    gameData.achievements
-        .forEach(
-            achievement => {
-
-                const progress =
-                    getProgress(
-                        achievement
-                    );
-
-                const completed =
-                    progress >=
-                    achievement.requirement;
-
-                if (completed)
-                    completedCount++;
-
-                const percentage =
-                    Math.min(
-                        100,
-                        (
-                            progress /
-                            achievement.requirement
-                        ) * 100
-                    );
-
-                const div =
-                    document.createElement(
-                        "div"
-                    );
-
-                div.className =
-                    "achievement" +
-                    (
-                        completed
-                            ? " completed"
-                            : ""
-                    );
-
-                div.innerHTML = `
-
-                    <div
-                        class="achievement-name"
-                    >
-                        ${escapeHTML(
-                            achievement.name
-                        )}
-                    </div>
-
-                    <div
-                        class="
-                            achievement-rarity
-                            ${rarityClass(
-                                achievement.rarity
-                            )}
-                        "
-                    >
-                        ${achievement.rarity}
-                    </div>
-
-                    <div
-                        class="
-                            achievement-description
-                        "
-                    >
-                        ${escapeHTML(
-                            achievement.description
-                        )}
-                    </div>
-
-                    <div
-                        class="progress"
-                    >
-                        <div
-                            class="progress-bar"
-                            style="
-                                width:${percentage}%
-                            "
-                        ></div>
-                    </div>
-
-                    <div
-                        class="progress-text"
-                    >
-                        ${Math.min(
-                            progress,
-                            achievement.requirement
-                        )}
-                        /
-                        ${achievement.requirement}
-                    </div>
-
-                    <div
-                        class="achievement-check"
-                    >
-                        ✓
-                    </div>
-
-                `;
-
-                container.appendChild(
-                    div
-                );
-
-            }
-        );
-
-    document.getElementById(
-        "achievementCount"
-    ).textContent =
-        `${completedCount}/${gameData.achievements.length}`;
-
-}
-
-
-/* =========================================================
-   ACHIEVEMENT CHECK
-========================================================= */
-
-function checkAchievements() {
-
-    gameData.achievements
-        .forEach(
-            achievement => {
-
-                const progress =
-                    getProgress(
-                        achievement
-                    );
-
-                if (
-                    progress >=
-                    achievement.requirement &&
-                    !achievement.completed
-                ) {
-
-                    achievement.completed =
-                        true;
-
-                    setTimeout(
-                        () => {
-
-                            playAchievementSound();
-
-                            showToast(
-                                "Achievement Unlocked",
-                                achievement.name +
-                                " — " +
-                                achievement.description,
-                                true
-                            );
-
-                            createConfetti();
-
-                        },
-                        100
-                    );
-
-                }
-
-            }
-        );
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function showToast(
-    title,
-    description,
-    achievement = false
-) {
-
-    const container =
-        document.getElementById(
-            "toastContainer"
-        );
-
-    const toast =
-        document.createElement(
-            "div"
-        );
-
-    toast.className =
-        "toast" +
-        (
-            achievement
-                ? " achievement"
-                : ""
-        );
-
-    toast.innerHTML = `
-
-        <div class="toast-badge">
-            ${
-                achievement
-                    ? "Achievement"
-                    : "Notification"
-            }
-        </div>
-
-        <div class="toast-title">
-            ${escapeHTML(title)}
-        </div>
-
-        <div class="toast-description">
-            ${escapeHTML(description)}
-        </div>
-
-    `;
-
-    container.appendChild(
-        toast
-    );
-
-    setTimeout(
-        () => {
-
-            toast.classList.add(
-                "hide"
+        const unlocked =
+            data.achievements.includes(
+                a.id
             );
 
-            setTimeout(
-                () => toast.remove(),
-                350
-            );
+        const element =
+            document.createElement("div");
 
-        },
-        3500
-    );
+        element.className =
+            "achievement " +
+            (unlocked
+                ? "unlocked"
+                : "locked");
 
-}
+        element.innerHTML = `
 
-
-/* =========================================================
-   CONFETTI
-========================================================= */
-
-function createConfetti() {
-
-    const colors = [
-        "#5865f2",
-        "#7c55c9",
-        "#e0aa24",
-        "#3ca66b",
-        "#e05b5b",
-        "#4d8bd8"
-    ];
-
-    for (
-        let i = 0;
-        i < 28;
-        i++
-    ) {
-
-        const piece =
-            document.createElement(
-                "div"
-            );
-
-        piece.className =
-            "confetti";
-
-        piece.style.left =
-            Math.random() * 100 +
-            "vw";
-
-        piece.style.background =
-            colors[
-                Math.floor(
-                    Math.random() *
-                    colors.length
-                )
-            ];
-
-        piece.style.animationDelay =
-            Math.random() * .25 +
-            "s";
-
-        piece.style.transform =
-            `rotate(
-                ${Math.random() * 360}deg
-            )`;
-
-        document.body.appendChild(
-            piece
-        );
-
-        setTimeout(
-            () => piece.remove(),
-            1600
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   HISTORY
-========================================================= */
-
-function addHistory(
-    text,
-    type = ""
-) {
-
-    gameData.history.unshift({
-        text: text,
-        type: type
-    });
-
-    if (
-        gameData.history.length > 50
-    ) {
-
-        gameData.history.pop();
-
-    }
-
-}
-
-
-function updateHistory() {
-
-    const container =
-        document.getElementById(
-            "history"
-        );
-
-    if (
-        gameData.history.length === 0
-    ) {
-
-        container.innerHTML = `
-
-            <div class="history-item">
-                Nothing here yet. Play a game.
+            <div class="achievement-icon">
+                ${unlocked ? a.icon : "🔒"}
             </div>
 
+            <h3>
+                ${a.name}
+            </h3>
+
+            <p>
+                ${a.description}
+            </p>
+
+            <span class="rarity">
+                ${a.rarity}
+            </span>
         `;
 
-        return;
+        container.appendChild(
+            element
+        );
+    });
+}
 
+
+// -------------------------
+// RENDER ACTIVITY
+// -------------------------
+
+function renderActivity() {
+
+    const container =
+        document.getElementById(
+            "activity"
+        );
+
+    container.innerHTML = "";
+
+    if (!data.activity.length) {
+
+        container.innerHTML =
+            `<div class="activity-item">
+                Nothing yet. Go gamble.
+            </div>`;
+
+        return;
     }
 
-    container.innerHTML =
-        gameData.history
-            .map(
-                item => `
+    data.activity.forEach(item => {
 
-                    <div
-                        class="
-                            history-item
-                            ${
-                                item.type === "win"
-                                    ? "history-win"
-                                    : ""
-                            }
-                            ${
-                                item.type === "special"
-                                    ? "history-special"
-                                    : ""
-                            }
-                        "
-                    >
-                        ${escapeHTML(
-                            item.text
-                        )}
-                    </div>
+        const element =
+            document.createElement("div");
 
-                `
-            )
-            .join("");
+        element.className =
+            "activity-item";
 
+        element.textContent = item;
+
+        container.appendChild(
+            element
+        );
+    });
 }
 
 
-/* =========================================================
-   STATS
-========================================================= */
+// -------------------------
+// SOUND TOGGLE
+// -------------------------
 
-function updateStats() {
+function toggleSound() {
+
+    soundEnabled =
+        !soundEnabled;
+
+    localStorage.setItem(
+        "binnouSound",
+        soundEnabled
+    );
 
     document.getElementById(
-        "gamesPlayed"
+        "soundButton"
     ).textContent =
-        gameData.totalGames;
+        soundEnabled
+            ? "🔊 Sound: ON"
+            : "🔇 Sound: OFF";
 
-    document.getElementById(
-        "wins"
-    ).textContent =
-        gameData.wins;
-
+    if (soundEnabled) {
+        tone(700, .1);
+    }
 }
 
 
-/* =========================================================
-   UI
-========================================================= */
+// -------------------------
+// RESET
+// -------------------------
 
-function updateUI() {
-
-    updateStats();
-
-    updateAchievements();
-
-    updateReward();
-
-    updateHistory();
-
-    saveGame();
-
-}
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-function resetGame() {
+function resetProgress() {
 
     const confirmed =
         confirm(
-            "Reset all Binnou Chance Game progress?"
+            "Are you sure you want to delete all progress?"
         );
 
-    if (!confirmed)
-        return;
+    if (!confirmed) return;
 
-    localStorage.removeItem(
-        STORAGE_KEY
+    data = {
+        games: 0,
+        wins: 0,
+        achievements: [],
+        binnou: false,
+        activity: []
+    };
+
+    save();
+
+    document
+        .getElementById("binnouLocked")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("binnouUnlocked")
+        .classList.add("hidden");
+
+    renderStats();
+    renderAchievements();
+    renderActivity();
+
+    showToast(
+        "Progress reset."
     );
-
-    location.reload();
-
 }
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+// -------------------------
+// INITIALIZE
+// -------------------------
 
-function escapeHTML(
-    text
-) {
+function initialize() {
 
-    const element =
-        document.createElement(
-            "div"
-        );
+    renderStats();
+    renderAchievements();
+    renderActivity();
 
-    element.textContent =
-        text;
+    if (data.binnou) {
 
-    return element.innerHTML;
+        document
+            .getElementById("binnouLocked")
+            .classList.add("hidden");
 
+        document
+            .getElementById("binnouUnlocked")
+            .classList.remove("hidden");
+    }
+
+    document.getElementById(
+        "soundButton"
+    ).textContent =
+        soundEnabled
+            ? "🔊 Sound: ON"
+            : "🔇 Sound: OFF";
 }
 
-
-/* =========================================================
-   START
-========================================================= */
-
-updateUI();
+initialize();
 
 </script>
 
 </body>
 </html>
-```
